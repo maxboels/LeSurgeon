@@ -6,9 +6,18 @@ This project now includes a complete LeRobot development environment with Python
 
 ### Quick Start
 
+**Using the convenience script (recommended):**
+```bash
+./lesurgeon.sh activate    # Activate environment
+./lesurgeon.sh status      # Check robot status  
+./lesurgeon.sh calibrate   # Calibrate robots
+./lesurgeon.sh help        # Show all commands
+```
+
+**Manual commands:**
 1. **Activate the environment:**
    ```bash
-   source activate_lerobot.sh
+   source scripts/activate_lerobot.sh
    ```
 
 2. **Test the installation:**
@@ -18,7 +27,7 @@ This project now includes a complete LeRobot development environment with Python
 
 3. **Setup Weights & Biases (if needed):**
    ```bash
-   python setup_wandb.py
+   python scripts/setup_wandb.py
    ```
 
 ### What's Included
@@ -29,13 +38,19 @@ This project now includes a complete LeRobot development environment with Python
 - **Weights & Biases** integration for experiment tracking
 - **Development tools:** pre-commit, pytest, debugging tools
 
-### Environment Files
+### Project Structure
 
-- `.lerobot/` - Python virtual environment (ignored by git)
-- `activate_lerobot.sh` - Convenient activation script
-- `setup_wandb.py` - Weights & Biases configuration helper
-- `setup_summary.sh` - Environment setup summary
-- `.gitignore` - Comprehensive ignore rules for ML/robotics projects
+- **scripts/** - Setup and utility scripts
+  - `activate_lerobot.sh` - Environment activation script
+  - `setup_wandb.py` - Weights & Biases configuration
+  - `robot_status.sh` - Robot calibration status checker
+  - `setup_summary.sh` - Environment setup documentation
+- **config/** - Robot configuration and calibration data
+  - `calibration.sh` - Robot calibration commands
+  - `calibration_backups/` - Backup copies of calibration files
+- **docs/** - Documentation and guides
+- **stl_files/** - 3D models and G-code files
+- **.lerobot/** - Python virtual environment (ignored by git)
 
 ### STL Files
 

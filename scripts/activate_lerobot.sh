@@ -12,9 +12,9 @@ NC='\033[0m' # No Color
 echo -e "${GREEN}🤖 Activating LeRobot Environment${NC}"
 echo "=================================="
 
-# Get the directory of this script
+# Get the directory of this script and go to parent directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-VENV_PATH="$SCRIPT_DIR/.lerobot"
+VENV_PATH="$SCRIPT_DIR/../.lerobot"
 
 # Check if virtual environment exists
 if [ ! -d "$VENV_PATH" ]; then
@@ -51,7 +51,7 @@ echo "• Wandb docs: https://docs.wandb.ai/"
 echo ""
 
 # Set environment variables for better experience
-export PYTHONPATH="$SCRIPT_DIR:$PYTHONPATH"
+export PYTHONPATH="$SCRIPT_DIR/..:$PYTHONPATH"
 
 echo -e "${GREEN}🎯 Ready to start your robotics journey!${NC}"
 echo ""
