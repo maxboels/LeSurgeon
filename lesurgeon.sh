@@ -20,6 +20,8 @@ show_help() {
     echo ""
     echo "Operation:"
     echo "  teleoperate  - Start teleoperation session"
+    echo "  teleop-auto  - Start teleoperation (auto-confirm calibration)"
+    echo "  teleop-cam   - Start teleoperation with U20CAM-1080p camera"
     echo ""
     echo "Development:"
     echo "  wandb        - Setup Weights & Biases"
@@ -99,6 +101,20 @@ except Exception as e:
         echo "Make sure both robots are connected and calibrated!"
         source .lerobot/bin/activate
         bash run/teleoperate.sh
+        ;;
+    
+    "teleop-auto")
+        echo "🎮 Starting teleoperation (auto-confirm)..."
+        echo "Make sure both robots are connected and calibrated!"
+        source .lerobot/bin/activate
+        bash run/teleoperate_auto.sh
+        ;;
+    
+    "teleop-cam")
+        echo "🎮 Starting teleoperation with U20CAM-1080p camera..."
+        echo "Make sure both robots and camera are connected!"
+        source .lerobot/bin/activate
+        bash run/teleoperate_with_camera.sh
         ;;
     
     "help"|*)

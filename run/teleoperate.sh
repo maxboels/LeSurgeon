@@ -1,4 +1,6 @@
-python -m lerobot.teleoperate \
+#!/bin/bash
+# Auto-confirm calibration file usage
+echo "" | python -m lerobot.teleoperate \
     --robot.type=so101_follower \
     --robot.port=/dev/ttyACM1 \
     --robot.id=lesurgeon_follower_arm \
