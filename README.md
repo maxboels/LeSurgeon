@@ -8,11 +8,12 @@ This project now includes a complete LeRobot development environment with Python
 
 **Using the convenience script (recommended):**
 ```bash
-./lesurgeon.sh activate    # Activate environment
-./lesurgeon.sh status      # Check robot status  
-./lesurgeon.sh calibrate   # Calibrate robots
-./lesurgeon.sh teleoperate # Start teleoperation session
-./lesurgeon.sh help        # Show all commands
+./lesurgeon.sh activate      # Activate environment
+./lesurgeon.sh status        # Check robot status  
+./lesurgeon.sh calibrate     # Calibrate robots
+./lesurgeon.sh teleoperate   # Standard teleoperation
+./lesurgeon.sh teleop-cam    # Camera-enabled teleoperation (U20CAM-1080p)
+./lesurgeon.sh help          # Show all commands
 ```
 
 **Manual commands:**
@@ -51,7 +52,8 @@ This project now includes a complete LeRobot development environment with Python
   - `setup_wandb.py` - Weights & Biases configuration
   - `setup_summary.sh` - Environment setup documentation
 - **run/** - Operational scripts for robot tasks
-  - `teleoperate.sh` - Start teleoperation session
+  - `teleoperate.sh` - Standard teleoperation session
+  - `teleoperate_with_camera.sh` - Camera-enabled teleoperation (U20CAM-1080p @ 720p)
   - `robot_status.sh` - Check robot calibration status
 - **config/** - Robot configuration and calibration data
   - `calibration.sh` - Robot calibration commands
@@ -69,9 +71,11 @@ Once your robots are calibrated, you can:
 
 **Teleoperation (Control follower with leader arm):**
 ```bash
-./lesurgeon.sh teleoperate    # Easy way
+./lesurgeon.sh teleoperate    # Standard teleoperation (no camera)
+./lesurgeon.sh teleop-cam     # Camera-enabled teleoperation with U20CAM-1080p
 # OR manually:
-bash run/teleoperate.sh       # Direct command
+bash run/teleoperate.sh       # Direct standard command
+bash run/teleoperate_with_camera.sh  # Direct camera command
 ```
 
 **Data Recording:**
