@@ -18,6 +18,9 @@ show_help() {
     echo "  follower     - Calibrate follower arm only"
     echo "  leader       - Calibrate leader arm only"
     echo ""
+    echo "Operation:"
+    echo "  teleoperate  - Start teleoperation session"
+    echo ""
     echo "Development:"
     echo "  wandb        - Setup Weights & Biases"
     echo "  test         - Test robot connection"
@@ -29,12 +32,12 @@ show_help() {
 case "${1:-help}" in
     "activate")
         echo "🔧 Activating LeRobot environment..."
-        source scripts/activate_lerobot.sh
+        source setup/activate_lerobot.sh
         ;;
     
     "status")
         echo "📊 Checking robot status..."
-        cd scripts && ./robot_status.sh && cd ..
+        cd run && ./robot_status.sh && cd ..
         ;;
     
     "calibrate")
@@ -61,7 +64,7 @@ case "${1:-help}" in
     "follower")
         echo "🔧 Calibrating follower arm..."
         source .lerobot/bin/activate
-        lerobot-calibrate --robot.type=so101_follower --robot.port=/dev/ttyACM0 --robot.id=lesurgeon_follower_arm
+        lerobot-calibrate --robot.type=so101_follower --robot.port=/dev/ttyACM1 --robot.id=lesurgeon_follower_arm
         ;;
     
     "leader")
@@ -73,7 +76,7 @@ case "${1:-help}" in
     "wandb")
         echo "📊 Setting up Weights & Biases..."
         source .lerobot/bin/activate
-        python scripts/setup_wandb.py
+        python setup/setup_wandb.py
         ;;
     
     "test")
@@ -89,6 +92,13 @@ except Exception as e:
     print(f'❌ Error: {e}')
     exit(1)
 "
+        ;;
+    
+    "teleoperate")
+        echo "🎮 Starting teleoperation session..."
+        echo "Make sure both robots are connected and calibrated!"
+        source .lerobot/bin/activate
+        bash run/teleoperate.sh
         ;;
     
     "help"|*)

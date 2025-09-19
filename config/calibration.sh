@@ -4,7 +4,7 @@
 # Follower
 lerobot-calibrate \
     --robot.type=so101_follower \
-    --robot.port=/dev/ttyACM0 \
+    --robot.port=/dev/ttyACM1 \
     --robot.id=lesurgeon_follower_arm # <- Give the robot a unique name
 
 

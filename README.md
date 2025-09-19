@@ -11,13 +11,14 @@ This project now includes a complete LeRobot development environment with Python
 ./lesurgeon.sh activate    # Activate environment
 ./lesurgeon.sh status      # Check robot status  
 ./lesurgeon.sh calibrate   # Calibrate robots
+./lesurgeon.sh teleoperate # Start teleoperation session
 ./lesurgeon.sh help        # Show all commands
 ```
 
 **Manual commands:**
 1. **Activate the environment:**
    ```bash
-   source scripts/activate_lerobot.sh
+   source setup/activate_lerobot.sh
    ```
 
 2. **Test the installation:**
@@ -27,7 +28,12 @@ This project now includes a complete LeRobot development environment with Python
 
 3. **Setup Weights & Biases (if needed):**
    ```bash
-   python scripts/setup_wandb.py
+   python setup/setup_wandb.py
+   ```
+
+4. **Start teleoperation:**
+   ```bash
+   bash run/teleoperate.sh
    ```
 
 ### What's Included
@@ -40,17 +46,43 @@ This project now includes a complete LeRobot development environment with Python
 
 ### Project Structure
 
-- **scripts/** - Setup and utility scripts
+- **setup/** - Environment setup and configuration scripts
   - `activate_lerobot.sh` - Environment activation script
   - `setup_wandb.py` - Weights & Biases configuration
-  - `robot_status.sh` - Robot calibration status checker
   - `setup_summary.sh` - Environment setup documentation
+- **run/** - Operational scripts for robot tasks
+  - `teleoperate.sh` - Start teleoperation session
+  - `robot_status.sh` - Check robot calibration status
 - **config/** - Robot configuration and calibration data
   - `calibration.sh` - Robot calibration commands
   - `calibration_backups/` - Backup copies of calibration files
+- **debug/** - Diagnostic and troubleshooting tools
+  - `diagnose_motors.py` - Motor diagnostic script
+  - `simple_motor_check.py` - Simple motor position checker
 - **docs/** - Documentation and guides
 - **stl_files/** - 3D models and G-code files
 - **.lerobot/** - Python virtual environment (ignored by git)
+
+### Robot Operations
+
+Once your robots are calibrated, you can:
+
+**Teleoperation (Control follower with leader arm):**
+```bash
+./lesurgeon.sh teleoperate    # Easy way
+# OR manually:
+bash run/teleoperate.sh       # Direct command
+```
+
+**Data Recording:**
+```bash
+lerobot-record --robot=lesurgeon_follower_arm --teleop=lesurgeon_leader_arm
+```
+
+**Check Robot Status:**
+```bash
+./lesurgeon.sh status         # Check calibration and connection status
+```
 
 ### STL Files
 
