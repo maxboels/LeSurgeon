@@ -1,0 +1,279 @@
+# LeRobot Project .gitignore
+# =========================
+
+# Virtual Environments
+# --------------------
+.lerobot/
+.venv/
+venv/
+env/
+ENV/
+.env
+
+# Python
+# ------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# Machine Learning / AI specific
+# ------------------------------
+# Model files
+*.pth
+*.pt
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+*.joblib
+*.onnx
+*.pb
+*.tflite
+*.safetensors
+
+# Dataset files (usually large)
+datasets/
+data/
+*.csv
+*.json
+*.parquet
+*.arrow
+*.feather
+
+# Weights & Biases
+# ----------------
+wandb/
+.wandb/
+
+# Experiment logs
+logs/
+runs/
+outputs/
+checkpoints/
+results/
+
+# TensorBoard
+events.out.tfevents.*
+
+# MLflow
+mlruns/
+.mlflow/
+
+# LeRobot specific
+# ---------------
+# Recorded robot data
+recordings/
+videos/
+episodes/
+*.mp4
+*.avi
+*.mov
+*.mkv
+
+# Robot configuration files that might contain secrets
+robot_config.yaml
+device_config.json
+calibration_*.json
+
+# Temporary files
+# ---------------
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# IDE and Editor files
+# -------------------
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.spyderproject
+.spyproject
+.ropeproject
+
+# OS generated files
+# ------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Compiled files
+# --------------
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Compressed files
+# ----------------
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# System files
+# ------------
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# Network files
+# -------------
+.netrwhist
+*~
+
+# Large media files (optional - uncomment if you want to ignore them)
+# ------------------------------------------------------------------
+# *.wav
+# *.mp3
+# *.flac
+# *.jpg
+# *.jpeg
+# *.png
+# *.gif
+# *.bmp
+# *.tiff
+# *.svg
+
+# Environment variables and secrets
+# ---------------------------------
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+secrets.yaml
+secrets.json
+api_keys.txt
+
+# Database files
+# --------------
+*.db
+*.sqlite
+*.sqlite3
+
+# Node.js (if using any JS tools)
+# -------------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Documentation build
+# -------------------
+docs/_build/
+site/
+
+# Backup files
+# ------------
+*.bak
+*.backup
+*-backup
+*~
+
+# Cache directories
+# -----------------
+.cache/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+
+# Profiling data
+# --------------
+.prof
+
+# PyCharm
+# -------
+.idea/
+
+# Rope project settings
+# ---------------------
+.ropeproject
+
+# mkdocs documentation
+# --------------------
+site/
+
+# mypy
+# ----
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+# -----------------
+.pyre/
+
+# pytype static type analyzer
+# ---------------------------
+.pytype/
+
+# Cython debug symbols
+# --------------------
+cython_debug/
