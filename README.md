@@ -14,6 +14,10 @@ This project now includes a complete LeRobot development environment with Python
 ./lesurgeon.sh calibrate     # Calibrate robots
 ./lesurgeon.sh teleoperate   # Standard teleoperation
 ./lesurgeon.sh teleop-cam    # Camera-enabled teleoperation (U20CAM-1080p)
+./lesurgeon.sh hf-setup      # Setup Hugging Face authentication
+./lesurgeon.sh record        # Record teleoperation data for ML
+./lesurgeon.sh train         # Train ML policy on data
+./lesurgeon.sh inference     # Run trained policy
 ./lesurgeon.sh help          # Show all commands
 ```
 
@@ -50,6 +54,7 @@ This project now includes a complete LeRobot development environment with Python
 
 - **setup/** - Environment setup and configuration scripts
   - `activate_lerobot.sh` - Environment activation script
+  - `setup_huggingface.sh` - Hugging Face authentication and setup
   - `identify_arms_interactive.sh` - Interactive arm identification wizard
   - `verify_arm_identification.sh` - Verify current arm mappings
   - `setup_wandb.py` - Weights & Biases configuration
@@ -58,6 +63,12 @@ This project now includes a complete LeRobot development environment with Python
   - `teleoperate.sh` - Standard teleoperation session
   - `teleoperate_with_camera.sh` - Camera-enabled teleoperation (U20CAM-1080p @ 720p)
   - `robot_status.sh` - Check robot calibration status
+  - `record_data.sh` - Record teleoperation data for ML training
+  - `upload_dataset.sh` - Upload datasets to Hugging Face Hub
+  - `train_policy.sh` - Train ML policies on recorded data
+  - `run_inference.sh` - Run trained policy inference
+  - `replay_episodes.sh` - Replay recorded episodes
+  - `visualize_dataset.sh` - Visualize datasets
 - **config/** - Robot configuration and calibration data
   - `calibration.sh` - Robot calibration commands
   - `calibration_backups/` - Backup copies of calibration files
@@ -88,12 +99,59 @@ bash run/teleoperate_with_camera.sh  # Direct camera command
 
 **Data Recording:**
 ```bash
-lerobot-record --robot=lesurgeon_follower_arm --teleop=lesurgeon_leader_arm
+./lesurgeon.sh record        # Interactive data recording with camera
+./lesurgeon.sh record -n 10 -t "Pick and place cube"  # Custom episodes and task
 ```
 
 **Check Robot Status:**
 ```bash
 ./lesurgeon.sh status         # Check calibration and connection status
+```
+
+### Machine Learning Workflow
+
+**Setup (first time only):**
+```bash
+./lesurgeon.sh hf-setup      # Authenticate with Hugging Face
+```
+
+**Complete ML Pipeline:**
+```bash
+# 1. Record training data
+./lesurgeon.sh record -n 10 -t "Surgical task demonstration"
+
+# 2. Upload dataset to Hugging Face
+./lesurgeon.sh upload
+
+# 3. Train a policy
+./lesurgeon.sh train -p act
+
+# 4. Run inference with trained policy
+./lesurgeon.sh inference
+
+# 5. Replay episodes for verification
+./lesurgeon.sh replay -e 0
+
+# 6. Visualize your data
+./lesurgeon.sh visualize
+```
+
+**Advanced ML Commands:**
+```bash
+# Resume training from checkpoint
+./lesurgeon.sh train -r
+
+# Train with custom dataset and policy type
+./lesurgeon.sh train -d my-dataset -p act -v cuda
+
+# Run inference with teleop fallback
+./lesurgeon.sh inference --teleop
+
+# Replay specific episodes
+./lesurgeon.sh replay -e 3 -d my-dataset
+
+# Visualize specific episodes
+./lesurgeon.sh visualize -e 5 -o my_viz_folder
 ```
 
 ### STL Files

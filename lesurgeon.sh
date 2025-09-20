@@ -24,6 +24,15 @@ show_help() {
     echo "  teleop-auto  - Start teleoperation (auto-confirm calibration)"
     echo "  teleop-cam   - Start teleoperation with U20CAM-1080p camera"
     echo ""
+    echo "Data & ML:"
+    echo "  hf-setup     - Setup Hugging Face authentication"
+    echo "  record       - Record teleoperation data for ML training"
+    echo "  upload       - Upload dataset to Hugging Face Hub"
+    echo "  train        - Train ML policy on recorded data"
+    echo "  inference    - Run trained policy inference"
+    echo "  replay       - Replay recorded episodes"
+    echo "  visualize    - Visualize dataset"
+    echo ""
     echo "Development:"
     echo "  wandb        - Setup Weights & Biases"
     echo "  test         - Test robot connection"
@@ -138,6 +147,41 @@ except Exception as e:
         echo "Make sure both robots and camera are connected!"
         source .lerobot/bin/activate
         bash run/teleoperate_with_camera.sh
+        ;;
+    
+    "hf-setup")
+        echo "🤗 Setting up Hugging Face authentication..."
+        bash setup/setup_huggingface.sh
+        ;;
+    
+    "record")
+        echo "🎥 Starting data recording..."
+        bash run/record_data.sh "$@"
+        ;;
+    
+    "upload")
+        echo "📤 Uploading dataset to Hugging Face..."
+        bash run/upload_dataset.sh "$@"
+        ;;
+    
+    "train")
+        echo "🧠 Starting policy training..."
+        bash run/train_policy.sh "$@"
+        ;;
+    
+    "inference")
+        echo "🤖 Running policy inference..."
+        bash run/run_inference.sh "$@"
+        ;;
+    
+    "replay")
+        echo "🔄 Replaying episodes..."
+        bash run/replay_episodes.sh "$@"
+        ;;
+    
+    "visualize")
+        echo "📊 Visualizing dataset..."
+        bash run/visualize_dataset.sh "$@"
         ;;
     
     "help"|*)
