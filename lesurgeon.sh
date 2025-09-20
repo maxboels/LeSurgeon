@@ -52,11 +52,18 @@ case "${1:-help}" in
         read -p "Enter choice (1-3): " choice
         
         case $choice in
-            1) bash config/calibration.sh # Run follower section only
+            1) bash config/calibration.sh # Run follower section only (now with dynamic port detection)
                ;;
-            2) source .lerobot/bin/activate && lerobot-calibrate --teleop.type=so101_leader --teleop.port=/dev/ttyACM0 --teleop.id=lesurgeon_leader_arm
+            2) # Leader only calibration with dynamic port detection
+               source debug/detect_arm_ports.sh
+               if detect_arm_ports; then
+                   source .lerobot/bin/activate
+                   lerobot-calibrate --teleop.type=so101_leader --teleop.port="$LEADER_PORT" --teleop.id=lesurgeon_leader_arm
+               else
+                   echo "❌ Failed to detect leader arm port"
+               fi
                ;;
-            3) bash config/calibration.sh # Run both sections
+            3) bash config/calibration.sh # Run both sections (now with dynamic port detection)
                ;;
             *) echo "Invalid choice"
                ;;
@@ -64,15 +71,25 @@ case "${1:-help}" in
         ;;
     
     "follower")
-        echo "🔧 Calibrating follower arm..."
-        source .lerobot/bin/activate
-        lerobot-calibrate --robot.type=so101_follower --robot.port=/dev/ttyACM1 --robot.id=lesurgeon_follower_arm
+        echo "🔧 Calibrating follower arm with dynamic port detection..."
+        source debug/detect_arm_ports.sh
+        if detect_arm_ports; then
+            source .lerobot/bin/activate
+            lerobot-calibrate --robot.type=so101_follower --robot.port="$FOLLOWER_PORT" --robot.id=lesurgeon_follower_arm
+        else
+            echo "❌ Failed to detect follower arm port"
+        fi
         ;;
     
     "leader")
-        echo "🔧 Calibrating leader arm..."
-        source .lerobot/bin/activate
-        lerobot-calibrate --teleop.type=so101_leader --teleop.port=/dev/ttyACM0 --teleop.id=lesurgeon_leader_arm
+        echo "🔧 Calibrating leader arm with dynamic port detection..."
+        source debug/detect_arm_ports.sh
+        if detect_arm_ports; then
+            source .lerobot/bin/activate
+            lerobot-calibrate --teleop.type=so101_leader --teleop.port="$LEADER_PORT" --teleop.id=lesurgeon_leader_arm
+        else
+            echo "❌ Failed to detect leader arm port"
+        fi
         ;;
     
     "wandb")

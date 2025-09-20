@@ -1,16 +1,29 @@
 #!/bin/bash
-# Teleoperation without calibration confirmation
-# This script automatically accepts the existing calibration files
+# Dynamic ARM Teleoperation Script (Auto-confirm calibration)
+# Automatically detects the correct ports and accepts existing calibration files
+
+# Source the port detection utility
+source "$(dirname "$0")/../debug/detect_arm_ports.sh"
 
 echo "🎮 Starting teleoperation (auto-confirming calibration)..."
-echo "Both robots should be connected and calibrated!"
+echo ""
+
+# Detect ports
+if ! detect_arm_ports; then
+    echo "❌ Failed to detect ARM ports. Exiting."
+    exit 1
+fi
+
+echo "🚀 Both robots should be connected and calibrated!"
+echo "  - Follower: $FOLLOWER_PORT"
+echo "  - Leader:   $LEADER_PORT"
 echo ""
 
 # Simple approach: pipe "yes" to automatically confirm
 yes "" | head -n 1 | python -m lerobot.teleoperate \
     --robot.type=so101_follower \
-    --robot.port=/dev/ttyACM1 \
+    --robot.port="$FOLLOWER_PORT" \
     --robot.id=lesurgeon_follower_arm \
     --teleop.type=so101_leader \
-    --teleop.port=/dev/ttyACM0 \
+    --teleop.port="$LEADER_PORT" \
     --teleop.id=lesurgeon_leader_arm
