@@ -32,8 +32,11 @@ fi
 
 echo -e "${YELLOW}📝 Authenticating with Hugging Face...${NC}"
 
+# Activate LeRobot environment for CLI access
+source "$(dirname "$0")/../.lerobot/bin/activate"
+
 # Authenticate with Hugging Face
-huggingface-cli login --token "$HUGGINGFACE_TOKEN" --add-to-git-credential
+hf auth login --token "$HUGGINGFACE_TOKEN" --add-to-git-credential
 
 if [ $? -ne 0 ]; then
     echo -e "${RED}❌ Authentication failed${NC}"
@@ -45,7 +48,7 @@ echo ""
 
 # Get and display user information
 echo -e "${YELLOW}📊 Getting user information...${NC}"
-HF_USER=$(huggingface-cli whoami | head -n 1)
+HF_USER=$(hf whoami 2>&1 | grep -v "Warning" | head -n 1 | tr -d '[:space:]' | sed 's/%$//')
 
 if [ -z "$HF_USER" ]; then
     echo -e "${RED}❌ Failed to get user information${NC}"
@@ -55,9 +58,17 @@ fi
 echo -e "${GREEN}✅ Logged in as: $HF_USER${NC}"
 echo ""
 
-# Save user to environment
-echo "# Hugging Face User (auto-generated)" >> "$(dirname "$0")/../.env"
-echo "HF_USER=$HF_USER" >> "$(dirname "$0")/../.env"
+# Save user to environment (replace existing if present)
+ENV_FILE="$(dirname "$0")/../.env"
+if grep -q "^HF_USER=" "$ENV_FILE"; then
+    # Replace existing HF_USER line
+    sed -i "s/^HF_USER=.*/HF_USER=$HF_USER/" "$ENV_FILE"
+else
+    # Add new HF_USER line
+    echo "" >> "$ENV_FILE"
+    echo "# Hugging Face User (auto-generated)" >> "$ENV_FILE"
+    echo "HF_USER=$HF_USER" >> "$ENV_FILE"
+fi
 
 echo -e "${BLUE}💾 User information saved to .env${NC}"
 echo ""
