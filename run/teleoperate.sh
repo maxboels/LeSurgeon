@@ -20,7 +20,7 @@ echo "  - Leader:   $LEADER_PORT"
 echo ""
 
 # Auto-confirm calibration file usage
-echo "" | python -m lerobot.teleoperate \
+printf "\n\n" | python -m lerobot.teleoperate \
     --robot.type=so101_follower \
     --robot.port="$FOLLOWER_PORT" \
     --robot.id=lesurgeon_follower_arm \

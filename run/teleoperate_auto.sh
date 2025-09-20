@@ -19,8 +19,8 @@ echo "  - Follower: $FOLLOWER_PORT"
 echo "  - Leader:   $LEADER_PORT"
 echo ""
 
-# Simple approach: pipe "yes" to automatically confirm
-yes "" | head -n 1 | python -m lerobot.teleoperate \
+# Simple approach: pipe multiple empty lines to automatically confirm both arms
+printf "\n\n\n" | python -m lerobot.teleoperate \
     --robot.type=so101_follower \
     --robot.port="$FOLLOWER_PORT" \
     --robot.id=lesurgeon_follower_arm \
