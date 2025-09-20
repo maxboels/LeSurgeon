@@ -156,31 +156,37 @@ except Exception as e:
     
     "record")
         echo "🎥 Starting data recording..."
+        shift  # Remove the 'record' argument
         bash run/record_data.sh "$@"
         ;;
     
     "upload")
         echo "📤 Uploading dataset to Hugging Face..."
+        shift  # Remove the 'upload' argument
         bash run/upload_dataset.sh "$@"
         ;;
     
     "train")
         echo "🧠 Starting policy training..."
+        shift  # Remove the 'train' argument
         bash run/train_policy.sh "$@"
         ;;
     
     "inference")
         echo "🤖 Running policy inference..."
+        shift  # Remove the 'inference' argument
         bash run/run_inference.sh "$@"
         ;;
     
     "replay")
         echo "🔄 Replaying episodes..."
+        shift  # Remove the 'replay' argument
         bash run/replay_episodes.sh "$@"
         ;;
     
     "visualize")
         echo "📊 Visualizing dataset..."
+        shift  # Remove the 'visualize' argument
         bash run/visualize_dataset.sh "$@"
         ;;
     

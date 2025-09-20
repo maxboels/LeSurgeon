@@ -48,7 +48,7 @@ echo ""
 
 # Get and display user information
 echo -e "${YELLOW}📊 Getting user information...${NC}"
-HF_USER=$(hf whoami 2>&1 | grep -v "Warning" | head -n 1 | tr -d '[:space:]' | sed 's/%$//')
+HF_USER=$(hf whoami 2>&1 | grep -E '^[a-zA-Z0-9._-]+$' | head -n 1 | tr -d '[:space:]')
 
 if [ -z "$HF_USER" ]; then
     echo -e "${RED}❌ Failed to get user information${NC}"
