@@ -5,8 +5,8 @@
 # based on their unique hardware serial numbers.
 
 # Hardware serial numbers for each arm
-LEADER_SERIAL="5A46085090"
-FOLLOWER_SERIAL="58FA101278"
+LEADER_SERIAL="58FA101278"
+FOLLOWER_SERIAL="5A46085090"
 
 # Colors for output
 RED='\033[0;31m'

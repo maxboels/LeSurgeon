@@ -9,6 +9,7 @@ This project now includes a complete LeRobot development environment with Python
 **Using the convenience script (recommended):**
 ```bash
 ./lesurgeon.sh activate      # Activate environment
+./lesurgeon.sh identify      # Identify which arm is leader/follower (setup)
 ./lesurgeon.sh status        # Check robot status  
 ./lesurgeon.sh calibrate     # Calibrate robots
 ./lesurgeon.sh teleoperate   # Standard teleoperation
@@ -49,6 +50,8 @@ This project now includes a complete LeRobot development environment with Python
 
 - **setup/** - Environment setup and configuration scripts
   - `activate_lerobot.sh` - Environment activation script
+  - `identify_arms_interactive.sh` - Interactive arm identification wizard
+  - `verify_arm_identification.sh` - Verify current arm mappings
   - `setup_wandb.py` - Weights & Biases configuration
   - `setup_summary.sh` - Environment setup documentation
 - **run/** - Operational scripts for robot tasks
@@ -66,6 +69,11 @@ This project now includes a complete LeRobot development environment with Python
 - **.lerobot/** - Python virtual environment (ignored by git)
 
 ### Robot Operations
+
+**First-time setup - Identify your arms:**
+```bash
+./lesurgeon.sh identify      # Interactive wizard to identify leader/follower arms
+```
 
 Once your robots are calibrated, you can:
 
@@ -91,6 +99,33 @@ lerobot-record --robot=lesurgeon_follower_arm --teleop=lesurgeon_leader_arm
 ### STL Files
 
 The `stl_files/` directory contains 3D models and G-code files for the robotics hardware.
+
+### Arm Identification
+
+**Why identify arms?**
+The system needs to distinguish between the leader arm (controller) and follower arm (mimic). The identification wizard prevents confusion by letting you physically connect each arm when prompted.
+
+**First-time setup:**
+```bash
+./lesurgeon.sh identify      # Run the interactive identification wizard
+```
+
+**Verify current setup:**
+```bash
+./setup/verify_arm_identification.sh    # Check current arm mappings
+```
+
+The identification process:
+1. Disconnect both arms
+2. Connect only the LEADER arm (the one you control) when prompted
+3. Connect the FOLLOWER arm (the one that mimics) when prompted
+4. Configuration is automatically saved and tested
+
+**Manual identification scripts:**
+```bash
+./setup/identify_arms_interactive.sh    # Direct script access
+./setup/verify_arm_identification.sh    # Direct verification
+```
 
 ### Documentation
 

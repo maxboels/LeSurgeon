@@ -14,6 +14,7 @@ show_help() {
     echo "  status       - Show robot calibration status"
     echo ""
     echo "Calibration:"
+    echo "  identify     - Identify which arm is leader/follower (interactive)"
     echo "  calibrate    - Run robot calibration (interactive)"
     echo "  follower     - Calibrate follower arm only"
     echo "  leader       - Calibrate leader arm only"
@@ -35,6 +36,11 @@ case "${1:-help}" in
     "activate")
         echo "🔧 Activating LeRobot environment..."
         source setup/activate_lerobot.sh
+        ;;
+    
+    "identify")
+        echo "🔍 Starting interactive arm identification..."
+        bash setup/identify_arms_interactive.sh
         ;;
     
     "status")
