@@ -7,20 +7,22 @@
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 YELLOW='\033[1;33m'
+RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 echo -e "${GREEN}🤖 Activating LeRobot Environment${NC}"
 echo "=================================="
 
 # Get the directory of this script and go to parent directory
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-VENV_PATH="$SCRIPT_DIR/../.lerobot"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+VENV_PATH="$PROJECT_ROOT/.lerobot"
 
 # Check if virtual environment exists
 if [ ! -d "$VENV_PATH" ]; then
     echo -e "${RED}❌ Error: Virtual environment not found at $VENV_PATH${NC}"
     echo "Please run the setup script first to create the environment."
-    exit 1
+    return 1
 fi
 
 # Activate the virtual environment

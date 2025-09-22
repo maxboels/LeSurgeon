@@ -2,18 +2,44 @@
 
 ## 🤖 LeRobot Environment Setup
 
-This project now includes a complete LeRobot development environment with Python 3.10 and all required dependencies.
+This project includes a complete LeRobot development environment with Python 3.10 and all required dependencies.
+
+### Environment Activation
+
+**For active development (recommended):**
+```bash
+source setup/activate_lerobot.sh
+```
+This activates the environment in your current shell - you'll see `(.lerobot)` in your prompt.
+
+**For information display:**
+```bash
+./lesurgeon.sh activate
+```
+This shows environment information but returns you to your original shell when finished.
 
 ### Quick Start
 
-**Using the convenience script (recommended):**
+**Environment Activation:**
 ```bash
-./lesurgeon.sh activate      # Activate environment
+# Method 1: Direct activation (recommended for development)
+source setup/activate_lerobot.sh     # Keeps you in activated environment with (.lerobot) prompt
+
+# Method 2: Information display only
+./lesurgeon.sh activate              # Shows environment info but returns to original shell
+```
+
+**Robot Operations:**
+```bash
 ./lesurgeon.sh identify      # Identify which arm is leader/follower (setup)
 ./lesurgeon.sh status        # Check robot status  
 ./lesurgeon.sh calibrate     # Calibrate robots
 ./lesurgeon.sh teleoperate   # Standard teleoperation
 ./lesurgeon.sh teleop-cam    # Camera-enabled teleoperation (U20CAM-1080p)
+```
+
+**Data & Machine Learning:**
+```bash
 ./lesurgeon.sh hf-setup      # Setup Hugging Face authentication
 ./lesurgeon.sh record        # Record teleoperation data for ML
 ./lesurgeon.sh train         # Train ML policy on data
@@ -22,9 +48,10 @@ This project now includes a complete LeRobot development environment with Python
 ```
 
 **Manual commands:**
-1. **Activate the environment:**
+1. **Activate the environment (for development work):**
    ```bash
    source setup/activate_lerobot.sh
+   # You'll see (.lerobot) in your prompt indicating the environment is active
    ```
 
 2. **Test the installation:**
@@ -41,6 +68,10 @@ This project now includes a complete LeRobot development environment with Python
    ```bash
    bash run/teleoperate.sh
    ```
+
+> **Note:** The difference between `./lesurgeon.sh activate` and `source setup/activate_lerobot.sh`:
+> - `./lesurgeon.sh activate` displays environment information but doesn't keep you in the activated environment
+> - `source setup/activate_lerobot.sh` actually activates the environment in your current shell (recommended for development)
 
 ### What's Included
 

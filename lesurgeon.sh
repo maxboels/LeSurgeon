@@ -45,6 +45,11 @@ case "${1:-help}" in
     "activate")
         echo "🔧 Activating LeRobot environment..."
         source setup/activate_lerobot.sh
+        echo ""
+        echo "⚠️  Note: The environment was activated during this script, but you're now back in your original shell."
+        echo "To activate the environment in your current shell, run:"
+        echo "   source setup/activate_lerobot.sh"
+        echo ""
         ;;
     
     "identify")
