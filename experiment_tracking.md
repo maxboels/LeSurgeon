@@ -41,11 +41,14 @@ Use these commands to record your episodes:
 
 ```bash
 # Start recording session (adjust episode count for each phase)
-./run/record_data.sh -n 10 -t "Needle picking and passing - Phase 1"
-./run/record_data.sh -n 10 -t "Needle picking and passing - Phase 2" 
-./run/record_data.sh -n 10 -t "Needle picking and passing - Phase 3"
-./run/record_data.sh -n 10 -t "Needle picking and passing - Phase 4"
-./run/record_data.sh -n 10 -t "Needle picking and passing - Phase 5"
+./run/record_data.sh -n 5 -t "Needle picking and passing - Position 1"
+./run/record_data.sh -n 5 -t "Needle picking and passing - Position 2"
+./run/record_data.sh -n 5 -t "Needle picking and passing - Position 3"
+./run/record_data.sh -n 5 -t "Needle picking and passing - Position 4"
+./run/record_data.sh -n 5 -t "Needle picking and passing - Position 5"
+./run/record_data.sh -n 5 -t "Needle picking and passing - Position 6"
+...
+./run/record_data.sh -n 5 -t "Needle picking and passing - Position 15"
 
 # Check robot status before each session
 ./lesurgeon.sh status

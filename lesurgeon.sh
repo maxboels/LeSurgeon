@@ -27,6 +27,7 @@ show_help() {
     echo "Data & ML:"
     echo "  hf-setup     - Setup Hugging Face authentication"
     echo "  record       - Record teleoperation data for ML training"
+    echo "  record-series - Record multiple series (15 series × 5 episodes each)"
     echo "  upload       - Upload dataset to Hugging Face Hub"
     echo "  train        - Train ML policy on recorded data"
     echo "  inference    - Run trained policy inference"
@@ -163,6 +164,12 @@ except Exception as e:
         echo "🎥 Starting data recording..."
         shift  # Remove the 'record' argument
         bash run/record_data.sh "$@"
+        ;;
+    
+    "record-series")
+        echo "🎬 Starting series recording (15 series × 5 episodes)..."
+        shift  # Remove the 'record-series' argument
+        bash run/record_series.sh "$@"
         ;;
     
     "upload")

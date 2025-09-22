@@ -3,7 +3,7 @@
 # ==============================
 # Records teleoperation data for training ML models
 
-# Source environment variables and port detection
+# Source environment variables and port detectioRECORD_CMD="$RECORD_CMD --robot.cameras=\"{ wrist: {type: opencv, index_or_path: /dev/video0, width: 1920, height: 1080, fps: 30}, external: {type: opencv, index_or_path: /dev/video2, width: 1920, height: 1080, fps: 30}}\""
 source "$(dirname "$0")/../.env"
 source "$(dirname "$0")/../debug/detect_arm_ports.sh"
 
@@ -17,8 +17,10 @@ NC='\033[0m' # No Color
 
 # Default values
 DEFAULT_NUM_EPISODES=5
-DEFAULT_TASK="Dissect chicken thigh"
-DEFAULT_DATASET_NAME="lesurgeon-recordings"
+DEFAULT_TASK="Needle grasping and passing"
+DEFAULT_DATASET_NAME="lesurgeon-suturing"
+DEFAULT_EPISODE_TIME=60
+DEFAULT_RESET_TIME=30
 
 show_usage() {
     echo -e "${BLUE}🎥 LeSurgeon Data Recording${NC}"
@@ -30,6 +32,8 @@ show_usage() {
     echo "  -n, --episodes NUM     Number of episodes to record (default: $DEFAULT_NUM_EPISODES)"
     echo "  -t, --task DESCRIPTION Task description (default: '$DEFAULT_TASK')"
     echo "  -d, --dataset NAME     Dataset name (default: '$DEFAULT_DATASET_NAME')"
+    echo "  --episode-time SEC     Episode duration in seconds (default: $DEFAULT_EPISODE_TIME)"
+    echo "  --reset-time SEC       Reset time between episodes in seconds (default: $DEFAULT_RESET_TIME)"
     echo "  -r, --resume           Resume existing dataset (add more episodes)"
     echo "  --delete               Delete existing dataset and start fresh"
     echo "  -h, --help            Show this help message"
@@ -38,6 +42,7 @@ show_usage() {
     echo "  $0                                    # Use defaults"
     echo "  $0 -n 10 -t 'Pick and place cube'    # Custom episodes and task"
     echo "  $0 -d my-dataset -n 3                # Custom dataset name"
+    echo "  $0 --episode-time 90 --reset-time 45 # Custom timing (90s episodes, 45s reset)"
     echo "  $0 -r -n 3                           # Resume existing + 3 more episodes"
     echo "  $0 --delete                          # Delete existing and start fresh"
     echo ""
@@ -57,6 +62,8 @@ show_usage() {
 NUM_EPISODES=$DEFAULT_NUM_EPISODES
 TASK_DESCRIPTION="$DEFAULT_TASK"
 DATASET_NAME="$DEFAULT_DATASET_NAME"
+EPISODE_TIME=$DEFAULT_EPISODE_TIME
+RESET_TIME=$DEFAULT_RESET_TIME
 RESUME_RECORDING=false
 DELETE_EXISTING=false
 
@@ -72,6 +79,14 @@ while [[ $# -gt 0 ]]; do
             ;;
         -d|--dataset)
             DATASET_NAME="$2"
+            shift 2
+            ;;
+        --episode-time)
+            EPISODE_TIME="$2"
+            shift 2
+            ;;
+        --reset-time)
+            RESET_TIME="$2"
             shift 2
             ;;
         -r|--resume)
@@ -148,7 +163,9 @@ echo -e "${CYAN}📊 Recording Configuration:${NC}"
 echo "  - Episodes:    $NUM_EPISODES"
 echo "  - Task:        $TASK_DESCRIPTION"
 echo "  - Dataset:     ${HF_USER}/${DATASET_NAME}"
-echo "  - Cameras:     /dev/video0 (wrist), /dev/video2 (external) @ 1280x720 30fps"
+echo "  - Episode Time: ${EPISODE_TIME}s"
+echo "  - Reset Time:   ${RESET_TIME}s"
+echo "  - Cameras:     /dev/video0 (wrist), /dev/video2 (external) @ 1920x1080 30fps"
 echo ""
 
 # Display keyboard controls
@@ -186,6 +203,9 @@ RECORD_CMD="$RECORD_CMD --display_data=true"
 RECORD_CMD="$RECORD_CMD --dataset.repo_id=\"${HF_USER}/${DATASET_NAME}\""
 RECORD_CMD="$RECORD_CMD --dataset.num_episodes=\"$NUM_EPISODES\""
 RECORD_CMD="$RECORD_CMD --dataset.single_task=\"$TASK_DESCRIPTION\""
+RECORD_CMD="$RECORD_CMD --dataset.episode_time_s=\"$EPISODE_TIME\""
+RECORD_CMD="$RECORD_CMD --dataset.reset_time_s=\"$RESET_TIME\""
+
 
 # Add resume flag if resuming
 if [ "$RESUME_RECORDING" = true ]; then

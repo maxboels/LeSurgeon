@@ -15,7 +15,7 @@ if ! detect_arm_ports; then
 fi
 
 echo "📷 Both robots and dual cameras should be connected via USB hub!"
-echo "Cameras: Dual U20CAM-1080p @ 1280x720 30fps (MJPG format - Optimized for stability)"
+echo "Cameras: Dual U20CAM-1080p @ 1920x1080 30fps (MJPG format - Full 1080p Resolution)"
 echo "  - Camera 1: /dev/video0 (wrist view)"
 echo "  - Camera 2: /dev/video2 (external view)"
 echo "  - Follower: $FOLLOWER_PORT"
@@ -31,7 +31,7 @@ printf "\n\n" | python -m lerobot.teleoperate \
     --robot.type=so101_follower \
     --robot.port="$FOLLOWER_PORT" \
     --robot.id=lesurgeon_follower_arm \
-    --robot.cameras="{ wrist: {type: opencv, index_or_path: /dev/video0, width: 1280, height: 720, fps: 30}, external: {type: opencv, index_or_path: /dev/video2, width: 1280, height: 720, fps: 30}}" \
+    --robot.cameras="{ wrist: {type: opencv, index_or_path: /dev/video0, width: 1920, height: 1080, fps: 30}, external: {type: opencv, index_or_path: /dev/video2, width: 1920, height: 1080, fps: 30}}" \
     --teleop.type=so101_leader \
     --teleop.port="$LEADER_PORT" \
     --teleop.id=lesurgeon_leader_arm \

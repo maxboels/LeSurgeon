@@ -131,7 +131,8 @@ bash run/teleoperate_with_camera.sh  # Direct camera command
 **Data Recording:**
 ```bash
 ./lesurgeon.sh record        # Interactive data recording with camera
-./lesurgeon.sh record -n 10 -t "Pick and place cube"  # Custom episodes and task
+./lesurgeon.sh record -n 5 -t "Needle picking and passing"  # Custom episodes and task
+./lesurgeon.sh record -r       # Resume previous recording session
 ```
 
 **Check Robot Status:**
@@ -148,8 +149,8 @@ bash run/teleoperate_with_camera.sh  # Direct camera command
 
 **Complete ML Pipeline:**
 ```bash
-# 1. Record training data
-./lesurgeon.sh record -n 10 -t "Surgical task demonstration"
+# 1. Record training data  
+./lesurgeon.sh record -n 50 -d "lesurgeon-s01" -t "Needle picking and passing"
 
 # 2. Upload dataset to Hugging Face
 ./lesurgeon.sh upload
@@ -166,6 +167,25 @@ bash run/teleoperate_with_camera.sh  # Direct camera command
 # 6. Visualize your data
 ./lesurgeon.sh visualize
 ```
+
+**Dataset Series Recording:**
+
+For comprehensive training data, record multiple series of episodes using consistent naming:
+
+```bash
+./lesurgeon.sh record -d "lesurgeon-s" -n 50    # Series 1: Episodes 1-50
+```
+
+**Dataset Naming Convention:**
+- **Format**: `lesurgeon-s##` where `##` is the zero-padded series number
+- **Task**: Uses the default task name "Needle grasping and passing" for consistency
+- **Episodes**: 5 episodes per series (standard for surgical training data)
+- **Upload**: Each dataset is automatically uploaded to Hugging Face after recording
+- **Benefits**: 
+  - Separate datasets are safer (one failure doesn't affect others)
+  - Easier to manage and upload individually
+  - Can train on individual series or combine multiple series
+  - Clear organization for large-scale data collection
 
 **Advanced ML Commands:**
 ```bash

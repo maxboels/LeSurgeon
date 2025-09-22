@@ -21,16 +21,15 @@ show_usage() {
     echo "Usage: $0 [options]"
     echo ""
     echo "Options:"
-    echo "  -d, --dataset NAME     Dataset name (default: from .env)"
+    echo "  -d, --dataset NAME     Dataset name (required)"
     echo "  -h, --help            Show this help message"
     echo ""
     echo "Examples:"
-    echo "  $0                    # Upload default dataset"
     echo "  $0 -d my-dataset     # Upload specific dataset"
 }
 
 # Parse command line arguments
-DATASET_NAME="${DEFAULT_DATASET_NAME:-lesurgeon-recordings}"
+DATASET_NAME="${DEFAULT_DATASET_NAME:-}"
 
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -53,6 +52,13 @@ done
 echo -e "${BLUE}📤 Dataset Upload to Hugging Face${NC}"
 echo "================================"
 echo ""
+
+# Check if dataset name is provided
+if [ -z "$DATASET_NAME" ]; then
+    echo -e "${RED}❌ Dataset name is required. Use -d/--dataset to specify a dataset name.${NC}"
+    show_usage
+    exit 1
+fi
 
 # Check if authenticated
 if [ -z "$HF_USER" ]; then

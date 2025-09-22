@@ -21,19 +21,19 @@ show_usage() {
     echo "Usage: $0 [options]"
     echo ""
     echo "Options:"
-    echo "  -d, --dataset NAME     Dataset name (default: from .env)"
+    echo "  -d, --dataset NAME     Dataset name (required)"
     echo "  -e, --episode NUM      Specific episode to visualize (optional)"
     echo "  -o, --output DIR       Output directory for visualizations"
     echo "  -h, --help            Show this help message"
     echo ""
     echo "Examples:"
-    echo "  $0                     # Visualize default dataset"
-    echo "  $0 -e 3                # Visualize episode 3"
-    echo "  $0 -d my-data -o viz   # Custom dataset and output"
+    echo "  $0 -d my-dataset      # Visualize specific dataset"
+    echo "  $0 -d my-data -e 3    # Visualize episode 3 of specific dataset"
+    echo "  $0 -d my-data -o viz  # Custom dataset and output"
 }
 
 # Parse command line arguments
-DATASET_NAME="${DEFAULT_DATASET_NAME:-lesurgeon-recordings}"
+DATASET_NAME="${DEFAULT_DATASET_NAME:-}"
 EPISODE=""
 OUTPUT_DIR="outputs/visualizations"
 
@@ -67,6 +67,13 @@ echo -e "${BLUE}📊 Dataset Visualization${NC}"
 echo "======================="
 echo ""
 
+# Check if dataset name is provided
+if [ -z "$DATASET_NAME" ]; then
+    echo -e "${RED}❌ Dataset name is required. Use -d/--dataset to specify a dataset name.${NC}"
+    show_usage
+    exit 1
+fi
+
 # Check if authenticated
 if [ -z "$HF_USER" ]; then
     echo -e "${YELLOW}⚠️  Hugging Face user not set. Running authentication...${NC}"
@@ -90,35 +97,44 @@ mkdir -p "$OUTPUT_DIR"
 echo -e "${GREEN}🚀 Starting dataset visualization...${NC}"
 echo ""
 
-# Activate environment
-source .lerobot/bin/activate
+# Open LeRobot visualization web app
+VISUALIZATION_URL="https://huggingface.co/spaces/lerobot/visualize_dataset"
 
-# Run LeRobot visualization
+echo -e "${YELLOW}🌐 Opening LeRobot Dataset Visualization web app...${NC}"
+echo ""
+echo -e "${CYAN}📊 Visualization Information:${NC}"
+echo "  - Web App:     $VISUALIZATION_URL"
+echo "  - Your Dataset: ${HF_USER}/${DATASET_NAME}"
 if [ -n "$EPISODE" ]; then
-    echo -e "${YELLOW}📊 Visualizing episode $EPISODE...${NC}"
-    lerobot-visualize \
-        --repo-id "${HF_USER}/${DATASET_NAME}" \
-        --episode-id "$EPISODE" \
-        --output-dir "$OUTPUT_DIR"
+    echo "  - Episode:     $EPISODE"
 else
-    echo -e "${YELLOW}📊 Visualizing all episodes...${NC}"
-    lerobot-visualize \
-        --repo-id "${HF_USER}/${DATASET_NAME}" \
-        --output-dir "$OUTPUT_DIR"
+    echo "  - Episodes:    All available"
+fi
+echo ""
+
+# Try to open the URL in the default browser
+if command -v xdg-open > /dev/null; then
+    echo -e "${GREEN}� Opening visualization web app in your browser...${NC}"
+    xdg-open "$VISUALIZATION_URL" &
+elif command -v open > /dev/null; then
+    echo -e "${GREEN}🚀 Opening visualization web app in your browser...${NC}"
+    open "$VISUALIZATION_URL" &
+else
+    echo -e "${YELLOW}⚠️  Could not automatically open browser.${NC}"
 fi
 
-if [ $? -eq 0 ]; then
-    echo ""
-    echo -e "${GREEN}🎉 Visualization completed!${NC}"
-    echo ""
-    echo -e "${BLUE}📁 Output Files:${NC}"
-    ls -la "$OUTPUT_DIR"
-    echo ""
-    echo -e "${CYAN}View your visualizations:${NC}"
-    echo "  - Open files in: $OUTPUT_DIR"
-    echo "  - Dataset URL: https://huggingface.co/datasets/${HF_USER}/${DATASET_NAME}"
+echo ""
+echo -e "${GREEN}🎉 Visualization setup completed!${NC}"
+echo ""
+echo -e "${BLUE}� Instructions:${NC}"
+echo "  1. Visit: $VISUALIZATION_URL"
+echo "  2. Enter your dataset: ${HF_USER}/${DATASET_NAME}"
+if [ -n "$EPISODE" ]; then
+    echo "  3. Select episode: $EPISODE"
 else
-    echo ""
-    echo -e "${RED}❌ Visualization failed. Please check the error messages above.${NC}"
-    exit 1
+    echo "  3. Browse all episodes interactively"
 fi
+echo ""
+echo -e "${CYAN}Additional Resources:${NC}"
+echo "  - Dataset URL: https://huggingface.co/datasets/${HF_USER}/${DATASET_NAME}"
+echo "  - LeRobot Docs: https://lerobot.huggingface.co/"
