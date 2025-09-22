@@ -22,6 +22,9 @@ echo "  - Follower: $FOLLOWER_PORT"
 echo "  - Leader:   $LEADER_PORT"
 echo ""
 
+echo "� To stop teleoperation: Press Ctrl+C in this terminal"
+echo ""
+
 source .lerobot/bin/activate
 
 printf "\n\n" | python -m lerobot.teleoperate \
