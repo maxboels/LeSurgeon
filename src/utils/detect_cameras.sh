@@ -39,15 +39,15 @@ get_camera_config() {
     echo "U20CAM_AVAILABLE=\"$u20cam_available\"" >&2
     
     if [[ "$zed_available" == "true" && "$u20cam_available" == "true" ]]; then
-        # Best setup: U20CAM for close-up wrist view, ZED multi-modal for spatial awareness
-        echo "CAMERA_CONFIG=\"{ wrist: {type: opencv, index_or_path: /dev/video0, width: 1280, height: 720, fps: 30}, zed_left: {type: opencv, index_or_path: /dev/video2, width: 1280, height: 720, fps: 30}, zed_stereo: {type: opencv, index_or_path: /dev/video2, width: 2560, height: 720, fps: 30}}\""
-        echo "CAMERA_DESCRIPTION=\"U20CAM (wrist) + ZED 2 Multi-Modal (left eye + stereo depth)\""
-        echo "CAMERA_MODE=\"hybrid\""
+        # Best case: U20CAM for wrist + ZED 2 stereo as combined feed that we'll split in post-processing
+        echo "CAMERA_DESCRIPTION=\"U20CAM (wrist) + ZED 2 (stereo)\""
+        echo "CAMERA_CONFIG=\"{ wrist: {type: opencv, index_or_path: /dev/video0, width: 1280, height: 720, fps: 30}, zed_stereo: {type: opencv, index_or_path: /dev/video2, width: 2560, height: 720, fps: 30}}\""
+        echo "CAMERA_MODE=\"hybrid_multimodal\""
     elif [[ "$zed_available" == "true" ]]; then
-        # ZED multi-modal: Left eye + right eye + stereo for depth
-        echo "CAMERA_CONFIG=\"{ left_eye: {type: opencv, index_or_path: /dev/video2, width: 1280, height: 720, fps: 30}, right_eye: {type: opencv, index_or_path: /dev/video2, width: 1280, height: 720, fps: 30}, stereo_depth: {type: opencv, index_or_path: /dev/video2, width: 2560, height: 720, fps: 30}}\""
-        echo "CAMERA_DESCRIPTION=\"ZED 2 Multi-Modal (stereo RGB + depth + point clouds)\""
-        echo "CAMERA_MODE=\"zed_multimodal\""
+        # ZED only: Multi-modal setup with separate views + depth
+        echo "CAMERA_CONFIG=\"{ zed_left: {type: zed_multimodal, eye: left}, zed_right: {type: zed_multimodal, eye: right}, zed_depth: {type: zed_multimodal, modality: depth}, zed_pointcloud: {type: zed_multimodal, modality: pointcloud}}\""
+        echo "CAMERA_DESCRIPTION=\"ZED 2 Multi-modal (left + right + depth + pointcloud)\""
+        echo "CAMERA_MODE=\"zed_only_multimodal\""
     elif [[ "$u20cam_available" == "true" ]]; then
         # Fallback to dual U20CAM setup
         echo "CAMERA_CONFIG=\"{ wrist: {type: opencv, index_or_path: /dev/video0, width: 1280, height: 720, fps: 30}, external: {type: opencv, index_or_path: /dev/video2, width: 1280, height: 720, fps: 30}}\""

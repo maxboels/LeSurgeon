@@ -1,0 +1,853 @@
+Depth Modes
+Stereolabs AI Depth leverages advanced neural networks to generate high-quality depth maps from stereo images, delivering reliable results even in challenging scenarios. Compared to traditional approaches, AI Depth provides superior accuracy in low-texture and low-light environments. This makes it especially well-suited for applications such as robotics, augmented reality (AR), and 3D mapping, where dependable depth perception is critical.
+
+The ZED SDK provides multiple AI-powered depth modes, allowing you to tailor depth sensing to your application’s requirements. Each mode offers a different balance of accuracy, range, and computational speed, so you can optimize for precision, performance, or a mix of both depending on your use case.
+
+NEURAL #
+The NEURAL depth mode uses AI-powered disparity estimation to deliver a strong balance of depth accuracy and processing speed. It is ideal for applications that require reliable depth perception without sacrificing real-time performance.
+
+
+Neural Depth Computational Performances on embedded devices #
+Orin AGX
+Orin NX 16
+Orin NX 8
+Nano 8 Gb
+Nano 4 Gb
+Cameras	FPS	CPU (%)	GPU (%)
+1	30	9	59
+2	23	20	94
+4	10	39	96
+📌 Note: performance obtained with ZED SDK v5.0.1 RC, ZED X Driver v1.3.0, and ZED X camera using the multicamera code example available on GitHub.
+
+Neural Depth Accuracy (ZED X) #
+Distance Range (m)	Mean Error	Standard Deviation*
+[0.3 - 4]	< 1 %	Low
+[4 - 6]	< 2.5%	Low
+[6 - 9 ]	< 4%	Medium
+[10 - 12 ]	< 6%	High
+(*) A lower standard deviation indicates more stable and accurate depth estimation, resulting in smoother and more reliable 3D point clouds. Higher deviation can lead to noise and distortion, producing wavy or unstable point clouds.
+
+Enabling the NEURAL depth mode in the API #
+C++
+Python
+C#
+# Set depth mode in NEURAL
+init_parameters = sl.InitParameters()
+init_parameters.depth_mode = sl.DEPTH_MODE.NEURAL
+NEURAL LIGHT #
+The NEURAL_LIGHT depth mode provides AI-powered disparity estimation optimized for speed and efficiency. It enables real-time depth sensing with lower computational load, making it ideal for multi-camera setups and applications where fast processing is prioritized over maximum depth accuracy.
+
+
+Neural Light Depth Computational Performances on embedded devices #
+Orin AGX
+Orin NX 16
+Orin NX 8
+Nano 8 Gb
+Nano 4 Gb
+Cameras	FPS	CPU (%)	GPU (%)
+1	30	2	23
+2	30	5	47
+4	30	14	81
+📌 Note: performance obtained with ZED SDK v5.0.1 RC, ZED X Driver v1.3.0, and ZED X camera using the multicamera code example available on GitHub.
+
+Neural Depth Accuracy (ZED X) #
+Distance Range (m)	Mean Error	Standard Deviation*
+[0.3 - 3]	< 1 %	Low
+[3 - 5]	< 3%	Medium
+[5 - 12 ]	< 8%	High
+(*) A lower standard deviation indicates more stable and accurate depth estimation, resulting in smoother and more reliable 3D point clouds. Higher deviation can lead to noise and distortion, producing wavy or unstable point clouds.
+
+Enabling the NEURAL LIGHT depth mode in the API #
+C++
+Python
+C#
+# Set depth mode in NEURAL_LIGHT
+init_parameters = sl.InitParameters()
+init_parameters.depth_mode = sl.DEPTH_MODE.NEURAL_LIGHT
+NEURAL PLUS #
+The NEURAL_PLUS depth mode provides the highest depth accuracy and detail among all AI-powered modes. It is designed for applications that demand maximum precision and robustness, such as advanced robotics, inspection, and 3D reconstruction. While it requires more computational resources and delivers lower frame rates compared to other modes, NEURAL_PLUS excels in challenging environments and when capturing fine object details is critical.
+
+
+Neural Plus Depth Computational Performances on embedded devices #
+Orin AGX
+Orin NX 16
+Orin NX 8
+Nano 8 Gb
+Nano 4 Gb
+Cameras	FPS	CPU (%)	GPU (%)
+1	12	2	92
+2	5	4	98
+4	2	14	98
+📌 Note: performance obtained with ZED SDK v5.0.1 RC, ZED X Driver v1.3.0, and ZED X camera using the multicamera code example available on GitHub.
+
+Neural Plus Accuracy (ZED X) #
+Distance Range (m)	Mean Error	Standard Deviation*
+[0.3 - 9]	< 1 %	Low
+[9 - 12]	< 2%	Medium
+(*) A lower standard deviation indicates more stable and accurate depth estimation, resulting in smoother and more reliable 3D point clouds. Higher deviation can lead to noise and distortion, producing wavy or unstable point clouds.
+
+Enabling the NEURAL PLUS depth mode in the API #
+C++
+Python
+C#
+# Set depth mode in NEURAL_PLUS
+init_parameters = sl.InitParameters()
+init_parameters.depth_mode = sl.DEPTH_MODE.NEURAL_PLUS
+Depth Modes Comparison #
+Depth Mode	Ideal Range	Benefits	Limitations
+NEURAL_LIGHT	[0.3-5]	
+Fastest depth mode available
+Best for multi camera setup
+Suited for mid-range obstacle avoidance
+Smallest ideal depth range
+May miss small objects or objects details
+Slightly less robust to environmental light changes than NEURAL
+NEURAL	[0.3-9]	
+Balanced depth and performance
+Better object detail than NEURAL_LIGHT
+Suitable for most multi-camera applications
+Same robustness to environmental changes as NEURAL_PLUS
+Slower than NEURAL_LIGHT
+Less detail than NEURAL_PLUS
+NEURAL_PLUS	[0.3-12]	
+Highest object details available
+Highest ideal depth range and stability
+Best for detecting near, far, and small objects
+Most robust to environmental changes (rain,sun) and light reflections
+Slowest depth mode
+May not be suited for multi camera setup
+Note:
+
+The depth range is highly dependent on the camera baseline and optics. A bigger baseline produces increased depth range. Here, tests were conducted with a ZED X GS (lens of 2 mm) whose stereo baseline is of 120 mm.
+Jetson Power Profile: Tests were conducted using MAXN without Super mode.
+
+
+
+InitParameters
+Class containing the options used to initialize the sl::Camera object. More...
+
+Functions
+ 	InitParameters (RESOLUTION camera_resolution_=RESOLUTION::AUTO, int camera_fps_=0, bool svo_real_time_mode_=false, DEPTH_MODE depth_mode_=DEPTH_MODE::NEURAL, UNIT coordinate_units_=UNIT::MILLIMETER, COORDINATE_SYSTEM coordinate_system_=COORDINATE_SYSTEM::IMAGE, int sdk_verbose_=1, int sdk_gpu_id_=-1, float depth_minimum_distance_=-1., float depth_maximum_distance_=-1., bool camera_disable_self_calib_=false, int camera_image_flip_=FLIP_MODE::OFF, bool enable_right_side_measure_=false, String sdk_verbose_log_file_=String(), int depth_stabilization_=30, CUcontext sdk_cuda_ctx_=CUcontext(), InputType input_type=InputType(), String optional_settings_path_=String(), bool sensors_required_=false, bool enable_image_enhancement_=true, String optional_opencv_calibration_file_=String(), float open_timeout_sec_=5.0f, bool async_grab_camera_recovery=false, float grab_compute_capping_fps=0, int enable_image_validity_check=true, bool async_image_retrieval=false, sl::Resolution maximum_working_resolution=sl::Resolution(0, 0))
+ 	Default constructor. More...
+ 
+bool 	save (String filename) const
+ 	Saves the current set of parameters into a file to be reloaded with the load() method. More...
+ 
+bool 	load (String filename)
+ 	Loads a set of parameters from the values contained in a previously saved file. More...
+ 
+bool 	encode (String &serialized_content) const
+ 	Generate a JSON Object (with the struct type as a key) containing the serialized struct, converted into a string. More...
+ 
+bool 	decode (const String &serialized_content)
+ 	Fill the structure from the serialized json object contained in the input string. More...
+ 
+bool 	operator== (const InitParameters &param1) const
+ 	Comparison operator ==. More...
+ 
+bool 	operator!= (const InitParameters &param1) const
+ 	Comparison operator !=. More...
+ 
+Attributes
+RESOLUTION 	camera_resolution
+ 	Desired camera resolution. More...
+ 
+int 	camera_fps
+ 	Requested camera frame rate. More...
+ 
+int 	camera_image_flip
+ 	Defines if a flip of the images is needed. More...
+ 
+bool 	camera_disable_self_calib
+ 	Disables the self-calibration process at camera opening. More...
+ 
+bool 	enable_right_side_measure
+ 	Enable the measurement computation on the right images. More...
+ 
+bool 	svo_real_time_mode
+ 	Defines if sl::Camera object return the frame in real time mode. More...
+ 
+DEPTH_MODE 	depth_mode
+ 	sl::DEPTH_MODE to be used. More...
+ 
+int 	depth_stabilization
+ 	Defines whether the depth needs to be stabilized and to what extent. More...
+ 
+float 	depth_minimum_distance
+ 	Minimum depth distance to be returned, measured in the sl::UNIT defined in coordinate_units. More...
+ 
+float 	depth_maximum_distance
+ 	Maximum depth distance to be returned, measured in the sl::UNIT defined in coordinate_units. More...
+ 
+UNIT 	coordinate_units
+ 	Unit of spatial data (depth, point cloud, tracking, mesh, etc.) for retrieval. More...
+ 
+COORDINATE_SYSTEM 	coordinate_system
+ 	sl::COORDINATE_SYSTEM to be used as reference for positional tracking, mesh, point clouds, etc. More...
+ 
+CUdevice 	sdk_gpu_id
+ 	NVIDIA graphics card to use. More...
+ 
+int 	sdk_verbose
+ 	Enable the ZED SDK verbose mode. More...
+ 
+String 	sdk_verbose_log_file
+ 	File path to store the ZED SDK logs (if sdk_verbose is enabled). More...
+ 
+CUcontext 	sdk_cuda_ctx
+ 	CUcontext to be used. More...
+ 
+InputType 	input
+ 	Defines the input source to initialize and open an sl::Camera object from. More...
+ 
+String 	optional_settings_path
+ 	Optional path where the ZED SDK has to search for the settings file (SN<XXXX>.conf file). More...
+ 
+String 	optional_opencv_calibration_file
+ 	Optional path where the ZED SDK can find a file containing the calibration information of the camera computed by OpenCV. More...
+ 
+bool 	sensors_required
+ 	Requires the successful opening of the motion sensors before opening the camera. More...
+ 
+bool 	enable_image_enhancement
+ 	Enable the Enhanced Contrast Technology, to improve image quality. More...
+ 
+float 	open_timeout_sec
+ 	Define a timeout in seconds after which an error is reported if the sl::Camera::open() method fails. More...
+ 
+bool 	async_grab_camera_recovery
+ 	Define the behavior of the automatic camera recovery during sl::Camera::grab() method call. More...
+ 
+float 	grab_compute_capping_fps
+ 	Define a computation upper limit to the grab frequency. More...
+ 
+bool 	async_image_retrieval
+ 	If set to true will camera image retrieve at a framerate different from Camera::grab() application framerate. This is useful for recording SVO or sending camera stream at different rate than application. More...
+ 
+int 	enable_image_validity_check
+ 	Enable or disable the image validity verification. More...
+ 
+sl::Resolution 	maximum_working_resolution
+ 	Set a maximum size for all SDK output, like retrieveImage and retrieveMeasure functions. More...
+ 
+Detailed Description
+Class containing the options used to initialize the sl::Camera object.
+
+This class allows you to select multiple parameters for the sl::Camera such as the selected camera, resolution, depth mode, coordinate system, and units of measurement.
+Once filled with the desired options, it should be passed to the sl::Camera.open() method.
+
+#include <sl/Camera.hpp>
+ 
+using namespace sl;
+ 
+int main(int argc, char **argv) {
+    Camera zed; // Create a ZED camera object
+ 
+    InitParameters init_params; // Set initial parameters
+    init_params.sdk_verbose = 0; // Disable verbose mode
+ 
+    // Use the camera in LIVE mode
+    init_params.camera_resolution = RESOLUTION::HD1080; // Use HD1080 video mode
+    init_params.camera_fps = 30; // Set fps at 30
+ 
+    // Or use the camera in SVO (offline) mode
+    //init_params.input.setFromSVOFile("xxxx.svo");
+ 
+    // Or use the camera in STREAM mode
+    //init_params.input.setFromStream("192.168.1.12",30000);
+ 
+    // Other parameters are left to their default values
+ 
+    // Open the camera
+    ERROR_CODE err = zed.open(init_params);
+    if (err != ERROR_CODE::SUCCESS)
+        exit(-1);
+ 
+    // Close the camera
+    zed.close();
+    return 0;
+}
+With its default values, it opens the camera in live mode at sl::RESOLUTION::HD720 (or sl::RESOLUTION::HD1200 for the ZED X/X Mini) and sets the depth mode to sl::DEPTH_MODE::ULTRA (or sl::DEPTH_MODE::PERFORMANCE on Jetson).
+You can customize it to fit your application.
+
+Note
+The parameters can also be saved and reloaded using its save() and load() methods.
+Constructor and Destructor
+InitParameters	(	RESOLUTION 	camera_resolution_ = RESOLUTION::AUTO,
+int 	camera_fps_ = 0,
+bool 	svo_real_time_mode_ = false,
+DEPTH_MODE 	depth_mode_ = DEPTH_MODE::NEURAL,
+UNIT 	coordinate_units_ = UNIT::MILLIMETER,
+COORDINATE_SYSTEM 	coordinate_system_ = COORDINATE_SYSTEM::IMAGE,
+int 	sdk_verbose_ = 1,
+int 	sdk_gpu_id_ = -1,
+float 	depth_minimum_distance_ = -1.,
+float 	depth_maximum_distance_ = -1.,
+bool 	camera_disable_self_calib_ = false,
+int 	camera_image_flip_ = FLIP_MODE::OFF,
+bool 	enable_right_side_measure_ = false,
+String 	sdk_verbose_log_file_ = String(),
+int 	depth_stabilization_ = 30,
+CUcontext 	sdk_cuda_ctx_ = CUcontext(),
+InputType 	input_type = InputType(),
+String 	optional_settings_path_ = String(),
+bool 	sensors_required_ = false,
+bool 	enable_image_enhancement_ = true,
+String 	optional_opencv_calibration_file_ = String(),
+float 	open_timeout_sec_ = 5.0f,
+bool 	async_grab_camera_recovery = false,
+float 	grab_compute_capping_fps = 0,
+int 	enable_image_validity_check = true,
+bool 	async_image_retrieval = false,
+sl::Resolution 	maximum_working_resolution = sl::Resolution(0, 0) 
+)		
+Default constructor.
+
+All the parameters are set to their default and optimized values.
+
+Functions
+bool save	(	String 	filename	)	const
+Saves the current set of parameters into a file to be reloaded with the load() method.
+
+Parameters
+filename	: Name of the file which will be created to store the parameters (extension '.json' will be added if not set).
+Returns
+True if file was successfully saved, otherwise false.
+Warning
+For security reason, the file must not exist.
+In case a file already exists, the method will return false and existing file will not be updated.
+InitParameters init_params; // Set initial parameters
+init_params.sdk_verbose = 1; // Enable verbose mode
+init_params.input.setFromSVOFile("/path/to/file.svo"); // Selects the and SVO file to be read
+init_params.save("initParameters.json"); // Export the parameters into a file
+bool load	(	String 	filename	)	
+Loads a set of parameters from the values contained in a previously saved file.
+
+Parameters
+filename	: Path to the file from which the parameters will be loaded (extension '.json' will be added at the end of the filename if not set).
+Returns
+True if the file was successfully loaded, otherwise false.
+InitParameters init_params; // Set initial parameters
+init_params.load("initParameters.json"); // Load the init_params from a previously exported file
+Note
+As the InitParameters files can be easily modified manually (using a text editor) this function allows you to test various settings without re-compiling your application.
+bool encode	(	String & 	serialized_content	)	const
+Generate a JSON Object (with the struct type as a key) containing the serialized struct, converted into a string.
+
+Parameters
+serialized_content	output string containing the JSON Object
+Returns
+True if file was successfully saved, otherwise false.
+bool decode	(	const String & 	serialized_content	)	
+Fill the structure from the serialized json object contained in the input string.
+
+Parameters
+serialized_content	input string containing the JSON Object
+Returns
+True if the decoding was successful, otherwise false.
+bool operator==	(	const InitParameters & 	param1	)	const
+Comparison operator ==.
+
+Parameters
+param1	to compare
+Returns
+true if the two struct are identical
+bool operator!=	(	const InitParameters & 	param1	)	const
+Comparison operator !=.
+
+Parameters
+param1	to compare
+Returns
+true if the two struct are different
+Variables
+RESOLUTION camera_resolution
+Desired camera resolution.
+
+Note
+Small resolutions offer higher framerate and lower computation time.
+In most situations, sl::RESOLUTION::HD720 at 60 FPS is the best balance between image quality and framerate.
+Default:
+
+ZED X/X Mini: sl::RESOLUTION::HD1200
+other cameras: sl::RESOLUTION::HD720
+Note
+Available resolutions are listed here: sl::RESOLUTION.
+int camera_fps
+Requested camera frame rate.
+
+If set to 0, the highest FPS of the specified camera_resolution will be used.
+Default: 0
+
+See sl::RESOLUTION for a list of supported frame rates.
+
+Note
+If the requested camera_fps is unsupported, the closest available FPS will be used.
+int camera_image_flip
+Defines if a flip of the images is needed.
+
+If you are using the camera upside down, setting this parameter to sl::FLIP_MODE::ON will cancel its rotation.
+The images will be horizontally flipped.
+Default: sl::FLIP_MODE::OFF
+
+Note
+From ZED SDK 3.2 a new sl::FLIP_MODE enum was introduced to add the automatic flip mode detection based on the IMU gravity detection.
+This does not work on sl::MODEL::ZED cameras since they do not have the necessary sensors.
+bool camera_disable_self_calib
+Disables the self-calibration process at camera opening.
+
+At initialization, sl::Camera runs a self-calibration process that corrects small offsets from the device's factory calibration.
+A drawback is that calibration parameters will slightly change from one (live) run to another, which can be an issue for repeatability.
+If set to true, self-calibration will be disabled and calibration parameters won't be optimized, raw calibration parameters from the configuration file will be used.
+Default: false
+
+Note
+In most situations, self calibration should remain enabled.
+You can also trigger the self-calibration at anytime after sl::Camera::open() by calling sl::Camera::updateSelfCalibration(), even if this parameter is set to true.
+bool enable_right_side_measure
+Enable the measurement computation on the right images.
+
+By default, the ZED SDK only computes a single depth map, aligned with the left camera image.
+This parameter allows you to enable sl::MEASURE::DEPTH_RIGHT and other sl::MEASURE::XXX_RIGHT at the cost of additional computation time.
+For example, mixed reality pass-through applications require one depth map per eye, so this parameter can be activated.
+Default: false
+
+bool svo_real_time_mode
+Defines if sl::Camera object return the frame in real time mode.
+
+When playing back an SVO file, each call to sl::Camera::grab() will extract a new frame and use it.
+However, it ignores the real capture rate of the images saved in the SVO file.
+Enabling this parameter will bring the SDK closer to a real simulation when playing back a file by using the images' timestamps.
+Default: false
+
+Note
+sl::Camera::grab() will return an error when trying to play too fast, and frames will be dropped when playing too slowly.
+DEPTH_MODE depth_mode
+sl::DEPTH_MODE to be used.
+
+The ZED SDK offers several sl::DEPTH_MODE, offering various levels of performance and accuracy.
+This parameter allows you to set the sl::DEPTH_MODE that best matches your needs.
+Default: sl::DEPTH_MODE::NEURAL
+
+Note
+Available depth mode are listed here: sl::DEPTH_MODE.
+int depth_stabilization
+Defines whether the depth needs to be stabilized and to what extent.
+
+Regions of generated depth map can oscillate from one frame to another.
+These oscillations result from a lack of texture (too homogeneous) on an object and by image noise.
+This parameter controls a stabilization filter that reduces these oscillations.
+In the range [0-100]:
+
+0 disable the depth stabilization (raw depth will be return)
+stabilization smoothness is linear from 1 to 100
+Default: 30
+
+Note
+The stabilization uses the positional tracking to increase its accuracy, so the positional tracking module will be enabled automatically when set to a value different from 0.
+Note that calling sl::Camera::enablePositionalTracking() with your own parameters afterwards is still possible.
+float depth_minimum_distance
+Minimum depth distance to be returned, measured in the sl::UNIT defined in coordinate_units.
+
+This parameter allows you to specify the minimum depth value (from the camera) that will be computed.
+
+
+In stereovision (the depth technology used by the camera), looking for closer depth values can have a slight impact on performance and memory consumption.
+On most modern GPUs, performance impact will be low. However, the impact of memory footprint will be visible.
+In cases of limited computation power, increasing this value can provide better performance.
+Default: -1 (corresponding values are available here)
+
+Note
+depth_minimum_distance value cannot be greater than 3 meters.
+0 will imply that depth_minimum_distance is set to the minimum depth possible for each camera (those values are available here).
+float depth_maximum_distance
+Maximum depth distance to be returned, measured in the sl::UNIT defined in coordinate_units.
+
+When estimating the depth, the ZED SDK uses this upper limit to turn higher values into sl::TOO_FAR ones.
+
+Note
+Changing this value has no impact on performance and doesn't affect the positional tracking nor the spatial mapping.
+It only change values the depth, point cloud and normals.
+UNIT coordinate_units
+Unit of spatial data (depth, point cloud, tracking, mesh, etc.) for retrieval.
+
+Default: sl::UNIT::MILLIMETER
+
+COORDINATE_SYSTEM coordinate_system
+sl::COORDINATE_SYSTEM to be used as reference for positional tracking, mesh, point clouds, etc.
+
+This parameter allows you to select the sl::COORDINATE_SYSTEM used by the sl::Camera object to return its measures.
+This defines the order and the direction of the axis of the coordinate system.
+Default: sl::COORDINATE_SYSTEM::IMAGE
+
+CUdevice sdk_gpu_id
+NVIDIA graphics card to use.
+
+By default the SDK will use the most powerful NVIDIA graphics card found.
+However, when running several applications, or using several cameras at the same time, splitting the load over available GPUs can be useful.
+This parameter allows you to select the GPU used by the sl::Camera using an ID from 0 to n-1 GPUs in your PC.
+Default: -1
+
+Note
+A non-positive value will search for all CUDA capable devices and select the most powerful.
+int sdk_verbose
+Enable the ZED SDK verbose mode.
+
+This parameter allows you to enable the verbosity of the ZED SDK to get a variety of runtime information in the console.
+When developing an application, enabling verbose (sdk_verbose >= 1) mode can help you understand the current ZED SDK behavior.
+However, this might not be desirable in a shipped version.
+Default: 1 (verbose message enabled)
+
+Note
+The verbose messages can also be exported into a log file.
+See sdk_verbose_log_file for more.
+String sdk_verbose_log_file
+File path to store the ZED SDK logs (if sdk_verbose is enabled).
+
+The file will be created if it does not exist.
+Default: ""
+
+Note
+Setting this parameter to any value will redirect all standard output print calls of the entire program.
+This means that your own standard output print calls will be redirected to the log file.
+This parameter can be particularly useful for creating a log system, and with Unreal or Unity applications that don't provide a standard console output.
+Warning
+The log file won't be cleared after successive executions of the application.
+This means that it can grow indefinitely if not cleared.
+CUcontext sdk_cuda_ctx
+CUcontext to be used.
+
+If your application uses another CUDA-capable library, giving its CUDA context to the ZED SDK can be useful when sharing GPU memories.
+This parameter allows you to set the CUDA context to be used by the ZED SDK.
+Leaving this parameter empty asks the SDK to create its own context.
+Default: (empty)
+
+Note
+When creating you own CUDA context, you have to define the device you will use. Do not forget to also specify it on sdk_gpu_id.
+On Jetson, you have to set the flag CU_CTX_SCHED_YIELD, during CUDA context creation.
+You can also let the SDK create its own context, and use sl::Camera::getCUDAContext() to use it.
+If you create your own CUDA context, you must ensure that it is destroyed after all SDK objects (sl::Camera, sl::Fusion) are destroyed.
+InputType input
+Defines the input source to initialize and open an sl::Camera object from.
+
+The SDK can handle different input types:
+
+Select a camera by its ID (/dev/videoX on Linux, and 0 to N cameras connected on Windows)
+InitParameters init_params; // Set initial parameters
+init_params.sdk_verbose = 1; // Enable verbose mode
+init_params.input.setFromCameraID(0); // Selects the camera with ID = 0
+Select a camera by its serial number
+InitParameters init_params; // Set initial parameters
+init_params.sdk_verbose = 1; // Enable verbose mode
+init_params.input.setFromSerialNumber(1010); // Selects the camera with serial number = 1010
+Open a recorded sequence in the SVO file format
+InitParameters init_params; // Set initial parameters
+init_params.sdk_verbose = 1; // Enable verbose mode
+init_params.input.setFromSVOFile("/path/to/file.svo"); // Selects the and SVO file to be read
+Open a streaming camera from its IP address and port
+InitParameters init_params; // Set initial parameters
+init_params.sdk_verbose = 1; // Enable verbose mode
+init_params.input.setFromStream("192.168.1.42"); // Selects the IP address of the streaming camera. A second optional parameter is available for port selection.
+Note
+Available cameras and their id/serial number can be listed using sl::Camera::getDeviceList() and sl::Camera::getStreamingDeviceList().
+Each sl::Camera will create its own memory (CPU and GPU), therefore the number of cameras used at the same time can be limited by the configuration of your computer (GPU/CPU memory and capabilities).
+Default : (empty)
+
+Note
+See sl::InputType for complementary information.
+String optional_settings_path
+Optional path where the ZED SDK has to search for the settings file (SN<XXXX>.conf file).
+
+This file contains the calibration information of the camera.
+Default: ""
+
+Note
+The settings file will be searched in the default directory:
+Linux: /usr/local/zed/settings/
+Windows: C:/ProgramData/stereolabs/settings
+If a path is specified and no file has been found, the ZED SDK will search the settings file in the default directory.
+An automatic download of the settings file (through ZED Explorer or the installer) will still download the files on the default path.
+InitParameters init_params; // Set initial parameters
+std::string home = getenv("HOME"); // Get /home/user as string using getenv()
+std::string path = home + "/Documents/settings/"; // Assuming /home/<user>/Documents/settings/SNXXXX.conf exists. Otherwise, it will be searched in /usr/local/zed/settings/
+init_params.optional_settings_path = sl::String(path.c_str());
+String optional_opencv_calibration_file
+Optional path where the ZED SDK can find a file containing the calibration information of the camera computed by OpenCV.
+
+Note
+Using this will disable the factory calibration of the camera.
+The file must be in a XML/YAML/JSON formatting provided by OpenCV.
+It also must contain the following keys: Size, K_LEFT (intrinsic left), K_RIGHT (intrinsic right), D_LEFT (distortion left), D_RIGHT (distortion right), R (extrinsic rotation), T (extrinsic translation).
+Warning
+Erroneous calibration values can lead to poor accuracy in all ZED SDK modules.
+bool sensors_required
+Requires the successful opening of the motion sensors before opening the camera.
+
+Default: false.
+
+Note
+If set to false, the ZED SDK will try to open and use the IMU (second USB device on USB2.0) and will open the camera successfully even if the sensors failed to open.
+This can be used for example when using a USB3.0 only extension cable (some fiber extension for example).
+
+Note
+This parameter only impacts the LIVE mode.
+If set to true, sl::Camera::open() will fail if the sensors cannot be opened.
+This parameter should be used when the IMU data must be available, such as object detection module or when the gravity is needed.
+
+
+Note
+This setting is not taken into account for sl::MODEL::ZED camera since it does not include sensors.
+bool enable_image_enhancement
+Enable the Enhanced Contrast Technology, to improve image quality.
+
+Default: true.
+
+
+If set to true, image enhancement will be activated in camera ISP. Otherwise, the image will not be enhanced by the IPS.
+
+Note
+This only works for firmware version starting from 1523 and up.
+float open_timeout_sec
+Define a timeout in seconds after which an error is reported if the sl::Camera::open() method fails.
+
+Set to '-1' to try to open the camera endlessly without returning error in case of failure.
+Set to '0' to return error in case of failure at the first attempt.
+Default: 5.0
+
+Note
+This parameter only impacts the LIVE mode.
+bool async_grab_camera_recovery
+Define the behavior of the automatic camera recovery during sl::Camera::grab() method call.
+
+When async is enabled and there's an issue with the communication with the sl::Camera object, sl::Camera::grab() will exit after a short period and return the sl::ERROR_CODE::CAMERA_REBOOTING warning.
+The recovery will run in the background until the correct communication is restored.
+When async_grab_camera_recovery is false, the sl::Camera::grab() method is blocking and will return only once the camera communication is restored or the timeout is reached.
+Default: false
+
+float grab_compute_capping_fps
+Define a computation upper limit to the grab frequency.
+
+This can be useful to get a known constant fixed rate or limit the computation load while keeping a short exposure time by setting a high camera capture framerate.
+The value should be inferior to the sl::InitParameters.camera_fps and strictly positive.
+
+Note
+It has no effect when reading an SVO file.
+This is an upper limit and won't make a difference if the computation is slower than the desired compute capping FPS.
+
+Note
+Internally the sl::Camera::grab() method always tries to get the latest available image while respecting the desired FPS as much as possible.
+bool async_image_retrieval
+If set to true will camera image retrieve at a framerate different from Camera::grab() application framerate. This is useful for recording SVO or sending camera stream at different rate than application.
+
+int enable_image_validity_check
+Enable or disable the image validity verification.
+
+This will perform additional verification on the image to identify corrupted data. This verification is done in the sl::Camera.grab() method and requires some computations.
+If an issue is found, the sl::Camera.grab() method will output a warning as sl::ERROR_CODE::CORRUPTED_FRAME.
+This version doesn't detect frame tearing currently.
+Default: false (disabled)
+
+sl::Resolution maximum_working_resolution
+Set a maximum size for all SDK output, like retrieveImage and retrieveMeasure functions.
+
+This will override the default (0,0) and instead of outputting native image size sl::Mat, the ZED SDK will take this size as default. A custom lower size can also be used at runtime, but not bigger. This is used for internal optimization of compute and memory allocations
+
+The default is similar to previous version with (0,0), meaning native image size
+
+Note
+: if maximum_working_resolution field are lower than 64, it will be interpreted as dividing scale factor;
+maximum_working_resolution = sl::Resolution(1280, 2) -> 1280 x (image_height/2) = 1280 x (half height)
+maximum_working_resolution = sl::Resolution(4, 4) -> (image_width/4) x (image_height/4) = quarter size
+
+
+
+Depth Settings
+sl::InitParameters Depth Parameters #
+For more information on these parameters, see the API documentation page.
+
+Depth Mode #
+Check this page to get more insights about the currently available depth modes for the ZED cameras.
+
+Depth Range #
+Depth range corresponds to the minimum and maximum distance at which the depth of an object can be estimated.
+
+ZED Mini
+ZED 2i
+ZED X
+ZED X Mini
+ZED 2i - Wide	ZED 2i - Narrow
+Focal Length	2.1mm	4mm
+Max Depth Range	0.3m to 20m (1.0ft to 65.6ft)	1.5m to 35m (4.9ft to 114.8ft)
+Ideal Depth Range	0.3m to 12m (1.0ft to 39.4ft)	1.5 to 20m (4.9ft to 65.6ft)
+Minimum Range #
+You can adjust the minimum detectable depth by setting depth_minimum_distance in InitParameters. Lowering this value allows the camera to estimate depth for objects closer to the lens, within the hardware’s supported range.
+
+C++
+Python
+C#
+init_params = sl.InitParameters()
+init_parameters.coordinate_units = sl.UNIT.METER
+init_parameters.depth_minimum_distance = 0.15 # Set the minimum depth perception distance to 15cm
+Maximum Range #
+You can increase the maximum detectable depth by setting depth_maximum_distance in InitParameters. Raising this value allows the camera to estimate depth for objects farther from the lens, up to the hardware’s supported maximum range.
+
+This is useful for applications that require depth information at longer distances.
+
+Depth accuracy decreases with distance, so it’s important to consider the trade-off between range and accuracy. Read more about depth accuracy to understand how it affects your application.
+
+C++
+Python
+C#
+init_params = sl.InitParameters()
+init_parameters.depth_mode = sl.DEPTH_MODE.NEURAL  # Set the depth mode to NEURAL
+init_parameters.coordinate_units = UNIT.METER
+init_parameters.depth_maximum_distance = 40       # Set the maximum depth perception distance to 40m
+Tips:
+
+The maximum depth range can be reduced to clamp values above a certain distance. This is useful to reduce depth jitter at long distances.
+Increasing the maximum range has no impact on memory or FPS.
+Depth Stabilization #
+Depth stabilization is a feature that reduces depth map jitter and enhances accuracy by temporally filtering depth data across multiple frames. It leverages the ZED SDK’s positional tracking to maintain stable depth estimates even when the camera is in motion. The system intelligently distinguishes between static and dynamic regions, ensuring that moving objects are not incorrectly fused, which preserves the integrity of depth information in dynamic scenes.
+
+Depth stabilization is enabled by default. Since it enables positional tracking in the background, you can disable depth stabilization using init_parameters.depth_stabilization = false to improve computational performance.
+
+Tips:
+
+For fixed cameras, we recommend enabling PositionalTrackingParameters::set_as_static while using depth stabilization. This allows the depth stabilizer module to know the camera is static so it can disable visual tracking and reduce the computational load.
+For applications requiring the Positional Tracking module to be disabled, the depth stabilization parameter must be set to 0; otherwise, the Positional Tracking module is automatically activated in the background.
+Enabling depth stabilization uses temporal tracking to smooth depth over time. However, if the stabilization strength is set too high and objects or the camera move quickly, the system may fail to keep up—causing “ghosting” or motion trails around fast-moving objects. By default, the Depth Stabilization parameter is set to 30.
+sl::RuntimeParameters Depth Parameters #
+For more information on these parameters, see the API documentation page.
+
+Depth Confidence Filtering #
+Depth estimation can introduce some uncertainty, resulting in points with varying reliability. While a small number of inaccurate points may not impact most applications, scenarios requiring high precision benefit from filtering out less reliable depth data.
+
+To help with this, the ZED SDK provides a confidence map. Each pixel in the confidence map is assigned a value from 0 (high confidence) to 100 (low confidence). Pixels with higher values are less trustworthy and can be excluded or handled differently to improve the overall quality of your depth data.
+
+C++
+Python
+C#
+confidence_map = sl.Mat()
+zed.retrieve_measure(confidence_map, sl.MEASURE.CONFIDENCE)
+To filter out unreliable points from the depth map or point cloud, you can either implement your own filtering function using the retrieved confidence data, or simply set the sl::RuntimeParameters::confidence_threshold parameter. When you set this threshold, the ZED SDK automatically removes all points with a confidence value higher than the specified limit, streamlining the process and ensuring only reliable depth data is used.
+
+Two different types of confidence thresholds are available:
+
+confidence_threshold: Filters out depth points with low confidence, primarily removing unreliable measurements around object edges. This helps prevent objects that are close together from appearing “linked” in the depth map.
+texture_confidence_threshold: Filters out depth points in regions with low image texture (uniform or featureless areas), where depth estimation is less reliable due to insufficient visual information.
+Image	Original Depth
+	
+confidence_threshold set to 50	texture_confidence_threshold set to 50
+
+
+
+Using the Depth Sensing API
+Depth Sensing Configuration #
+To enable depth sensing, set options in InitParameters when initializing the camera. For runtime adjustments—such as toggling depth computation or changing sensing modes—use RuntimeParameters while the camera is running.
+
+C++
+Python
+C#
+# Set configuration parameters
+init_params = sl.InitParameters()
+init_params.depth_mode = sl.DEPTH_MODE.ULTRA # Use ULTRA depth mode
+init_params.coordinate_units = sl.UNIT.MILLIMETER # Use millimeter units (for depth measurements)
+For more information on depth configuration parameters, see Depth Settings.
+
+Retrieving Depth Data #
+To obtain the depth map of a scene, first call grab() to capture a new frame, then use retrieveMeasure() to access the depth data aligned with the left image. The retrieveMeasure() function allows you to retrieve various types of data, including the depth map, confidence map, normal map, or point cloud, depending on the specified measure type.
+
+C++
+Python
+C#
+image = sl.Mat()
+depth_map = sl.Mat()
+runtime_parameters = sl.RuntimeParameters()
+if zed.grab(runtime_parameters) == sl.ERROR_CODE.SUCCESS :
+  # A new image and depth is available if grab() returns SUCCESS
+  zed.retrieve_image(image, sl.VIEW.LEFT) # Retrieve left image
+  zed.retrieve_measure(depth_map, sl.MEASURE.DEPTH) # Retrieve depth
+Accessing Depth Values #
+The depth map is stored in a sl::Mat object, which acts as a 2D matrix where each element represents the distance from the camera to a specific point in the scene. Each pixel at coordinates (X, Y) contains a 32-bit floating-point value indicating the depth (Z) at that location, typically in millimeters unless otherwise configured.
+
+To access the depth value at a particular pixel, use the getValue() method provided by the SDK. This allows you to retrieve the distance from the camera to the object at the specified pixel coordinates.
+
+C++
+Python
+C#
+depth_value = depth_map.get_value(x, y)
+By default, depth values are expressed in millimeters. Units can be changed using InitParameters::coordinate_units. Advanced users can retrieve images, depth and points clouds either in CPU memory (default) or in GPU memory using retrieveMeasure(*, *, MEM_GPU).
+
+Displaying Depth Image #
+The 32-bit depth map can be displayed as a grayscale 8-bit image
+
+To display the depth map, the ZED SDK scales the real depth values to 8-bit values [0, 255], where 255 (white) represents the closest possible depth value and 0 (black) represents the most distant possible depth value. We call this process depth normalization.
+
+To retrieve a depth image, you can use retrieveImage(depth, VIEW::DEPTH).
+
+📌 Note: Do not use the 8-bit depth image in your application for other purposes than displaying depth.
+
+C++
+Python
+C#
+depth_for_display = sl.Mat()
+zed.retrieve_image(depth_for_display, sl.VIEW.DEPTH)
+Getting Point Cloud Data #
+The ZED camera can also provide a 3D point cloud, which is a collection of points in 3D space representing the scene. Each point in the point cloud corresponds to a pixel in the depth map and contains its (X, Y, Z) coordinates along with color information (RGBA).
+
+A 3D point cloud with (X,Y,Z) coordinates and RGBA color can be retrieved using retrieveMeasure().
+
+C++
+Python
+C#
+point_cloud = sl.Mat()
+zed.retrieve_measure(point_cloud, sl.MEASURE.XYZRGBA)
+To access a specific pixel value, use getValue().
+
+C++
+Python
+C#
+# Get the 3D point cloud values for pixel (i, j)
+point3D = point_cloud.get_value(i, j)
+x = point3D[0]
+y = point3D[1]
+z = point3D[2]
+color = point3D[3]
+The point cloud stores its data on 4 channels using a 32-bit float for each channel. The last float is used to store color information, where R, G, B, and alpha channels (4 x 8-bit) are concatenated into a single 32-bit float.
+
+You can choose between different color formats using XYZ<COLOR>. For example, BGRA color is available using retrieveMeasure(point_cloud, MEASURE::XYZBGRA).
+
+Measuring distance in point cloud #
+When measuring distances, use the 3D point cloud instead of the depth map. The Euclidean distance formula allows us to calculate the distance of an object relative to the left eye of the camera.
+
+C++
+Python
+C#
+# Measure the distance of a point in the scene represented by pixel (i,j)
+point3D = point_cloud.get_value(i, j)
+distance = math.sqrt(point3D[0] * point3D[0] + point3D[1] * point3D[1] + point3D[2] * point3D[2])
+Getting Normal Map #
+Retrieving Surface Normals #
+You can obtain a normal map by calling retrieveMeasure() with the NORMALS measure type. Surface normals are useful for applications such as traversability analysis and real-time lighting, as they describe the orientation of surfaces in the scene.
+
+The normal map is stored as a 4-channel, 32-bit floating-point matrix, where the X, Y, and Z components represent the direction of the normal vector at each pixel. The fourth channel is unused.
+
+C++
+Python
+C#
+normal_map = sl.Mat()
+zed.retrieve_measure(normal_map, sl.MEASURE.NORMALS)
+To access the normal vector at a specific pixel, use the getValue() method, which returns the (X, Y, Z) components of the normal.
+
+Adjusting Depth Resolution #
+To optimize performance and reduce data acquisition time, you can retrieve depth or point cloud data at a lower resolution by specifying the desired width and height in the retrieveMeasure() function. Additionally, you can choose whether the data is stored in CPU (RAM) or GPU memory by setting the appropriate memory type parameter. This flexibility allows you to balance processing speed and resource usage according to your application’s needs.
+
+C++
+Python
+C#
+point_cloud = sl.Mat()
+# Retrieve a resized point cloud
+# width and height specify the total number of columns and rows for the point cloud dataset
+width = zed.get_resolution().width / 2
+height = zed.get_resolution().height / 2
+zed.retrieve_measure(point_cloud, sl.MEASURE.XYZRGBA, sl.MEM.GPU, width, height)
+

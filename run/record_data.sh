@@ -35,8 +35,8 @@ show_usage() {
     echo "  -d, --dataset NAME     Dataset name (default: '$DEFAULT_DATASET_NAME')"
     echo "  --episode-time SEC     Episode duration in seconds (default: $DEFAULT_EPISODE_TIME)"
     echo "  --reset-time SEC       Reset time between episodes in seconds (default: $DEFAULT_RESET_TIME)"
-    echo "  --enhanced-zed         Use ZED multi-modal recording (RGB + depth + 3D points)"
-    echo "  --zed-resolution MODE  ZED resolution: fast/hd/fhd (default: hd, only with --enhanced-zed)"
+    echo "  --zed-multimodal       Use ZED multi-modal recording (RGB + depth + 3D points)"
+    echo "  --zed-resolution MODE  ZED resolution: fast/hd/fhd (default: hd, only with --zed-multimodal)"
     echo "  -r, --resume           Resume existing dataset (add more episodes)"
     echo "  --delete               Delete existing dataset and start fresh"
     echo "  -h, --help            Show this help message"
@@ -46,7 +46,7 @@ show_usage() {
     echo "  $0 -n 10 -t 'Pick and place cube'    # Custom episodes and task"
     echo "  $0 -d my-dataset -n 3                # Custom dataset name"
     echo "  $0 --episode-time 90 --reset-time 45 # Custom timing (90s episodes, 45s reset)"
-    echo "  $0 --enhanced-zed --zed-resolution hd # Enhanced ZED with depth + 3D data"
+    echo "  $0 --zed-multimodal --zed-resolution hd # ZED multi-modal with depth + 3D data"
     echo "  $0 -r -n 3                           # Resume existing + 3 more episodes"
     echo "  $0 --delete                          # Delete existing and start fresh"
     echo ""
@@ -70,7 +70,7 @@ EPISODE_TIME=$DEFAULT_EPISODE_TIME
 RESET_TIME=$DEFAULT_RESET_TIME
 RESUME_RECORDING=false
 DELETE_EXISTING=false
-ENHANCED_ZED=false
+ZED_MULTIMODAL=false
 ZED_RESOLUTION="hd"
 
 while [[ $# -gt 0 ]]; do
@@ -95,8 +95,8 @@ while [[ $# -gt 0 ]]; do
             RESET_TIME="$2"
             shift 2
             ;;
-        --enhanced-zed)
-            ENHANCED_ZED=true
+        --zed-multimodal)
+            ZED_MULTIMODAL=true
             shift
             ;;
         --zed-resolution)
@@ -175,15 +175,16 @@ fi
 # Detect camera configuration
 echo -e "${YELLOW}📷 Detecting camera setup...${NC}"
 if export_camera_config; then
-    if [ "$ENHANCED_ZED" = true ]; then
-        if [[ "$CAMERA_MODE" == "zed_multimodal" || "$CAMERA_MODE" == "hybrid" ]]; then
-            echo -e "${GREEN}✅ Enhanced ZED mode: Multi-modal recording (RGB + depth + 3D)${NC}"
+    if [ "$ZED_MULTIMODAL" = true ]; then
+        if [[ "$CAMERA_MODE" == "zed_only_multimodal" || "$CAMERA_MODE" == "hybrid_multimodal" || "$CAMERA_MODE" == "zed_multimodal" || "$CAMERA_MODE" == "hybrid" ]]; then
+            echo -e "${GREEN}✅ ZED Multi-Modal mode: Recording RGB + depth + 3D data${NC}"
             echo "   Resolution: $ZED_RESOLUTION"
-            CAMERA_DESCRIPTION="$CAMERA_DESCRIPTION (Enhanced Multi-Modal)"
+            echo "   Modalities: wrist (if available) + ZED left + ZED right + depth + pointcloud"
+            CAMERA_DESCRIPTION="$CAMERA_DESCRIPTION (Multi-Modal)"
         else
-            echo -e "${YELLOW}⚠️  Enhanced ZED requested but ZED camera not available${NC}"
+            echo -e "${YELLOW}⚠️  ZED multi-modal requested but ZED camera not available${NC}"
             echo "   Falling back to standard camera configuration"
-            ENHANCED_ZED=false
+            ZED_MULTIMODAL=false
         fi
     else
         echo -e "${GREEN}✅ Camera setup: $CAMERA_DESCRIPTION${NC}"
@@ -226,7 +227,14 @@ echo ""
 source .lerobot/bin/activate
 
 # Build the recording command
-RECORD_CMD="lerobot-record"
+if [ "$ZED_MULTIMODAL" = true ]; then
+    # Use ZED multi-modal recording script
+    RECORD_CMD="python src/zed_multimodal_record.py"
+else
+    # Use standard LeRobot recording
+    RECORD_CMD="lerobot-record"
+fi
+
 RECORD_CMD="$RECORD_CMD --robot.type=so101_follower"
 RECORD_CMD="$RECORD_CMD --robot.port=\"$FOLLOWER_PORT\""
 RECORD_CMD="$RECORD_CMD --robot.id=lesurgeon_follower_arm"

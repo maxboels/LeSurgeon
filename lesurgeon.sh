@@ -5,7 +5,7 @@
     echo "  test-cameras - Test camera system reorganization"
     echo ""
     echo "Enhanced Features:"
-    echo "  💡 Use --enhanced-zed flag with record/inference for ZED 2 stereo camera"
+    echo "  💡 Use --zed-multimodal flag with record/inference for ZED 2 stereo camera"
     echo "  💡 Use --zed-resolution [fast|hd|fhd] to set ZED quality mode"
     echo ""
     echo "Usage: ./lesurgeon.sh <command>"
@@ -33,6 +33,7 @@ show_help() {
     echo "  teleoperate  - Start teleoperation session"
     echo "  teleop-auto  - Start teleoperation (auto-confirm calibration)"
     echo "  teleop-cam   - Start teleoperation with camera (U20CAM or ZED 2 stereo)"
+    echo "  teleop-zed   - Start teleoperation with ZED 2 multi-modal (RGB+depth+3D)"
     echo ""
     echo "Data & ML:"
     echo "  hf-setup     - Setup Hugging Face authentication"
@@ -50,7 +51,7 @@ show_help() {
     echo "  test-cameras - Test camera system reorganization"
     echo ""
     echo "Enhanced Features:"
-    echo "  💡 Use --enhanced-zed flag with record/inference for ZED 2 stereo camera"
+    echo "  💡 Use --zed-multimodal flag with record/inference for ZED 2 stereo camera"
     echo "  💡 Use --zed-resolution [fast|hd|fhd] to set ZED quality mode"
     echo ""
     echo "Usage: ./lesurgeon.sh <command>"
@@ -174,6 +175,13 @@ except Exception as e:
         echo "Make sure both robots and camera are connected!"
         source .lerobot/bin/activate
         bash run/teleoperate_with_camera.sh
+        ;;
+    
+    "teleop-zed")
+        echo "🎮 Starting teleoperation with ZED 2 multi-modal (RGB+depth+3D)..."
+        echo "Make sure both robots and ZED 2 camera are connected!"
+        source .lerobot/bin/activate
+        bash run/teleoperate_zed_multimodal.sh
         ;;
     
     "hf-setup")

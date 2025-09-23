@@ -9,9 +9,11 @@ multi-modal data capture, and training data collection.
 from .zed_multimodal_camera import ZEDMultiModalCamera
 from .lerobot_zed_integration import LeRobotZEDCamera
 from .multimodal_collector import MultiModalCollector
+from .lerobot_zed_multimodal import ZEDMultiModalCamera as ZEDMultiModalCameraLR
 
 __all__ = [
     'ZEDMultiModalCamera',
     'LeRobotZEDCamera', 
-    'MultiModalCollector'
+    'MultiModalCollector',
+    'ZEDMultiModalCameraLR'
 ]
