@@ -89,7 +89,10 @@ class ZEDSDKCamera:
             # Set units and coordinate system
             self.init_params.coordinate_units = sl.UNIT.MILLIMETER
             self.init_params.coordinate_system = sl.COORDINATE_SYSTEM.LEFT_HANDED_Y_UP
-            self.init_params.depth_maximum_distance = self.depth_max_distance * 1000  # Convert to mm
+            
+            # Surgical range: 20cm-50cm for precise operation
+            self.init_params.depth_minimum_distance = 200  # 20cm minimum
+            self.init_params.depth_maximum_distance = 500  # 50cm maximum
             
             # Open camera
             err = self.zed.open(self.init_params)
@@ -97,9 +100,11 @@ class ZEDSDKCamera:
                 print(f"❌ ZED Camera failed to open: {repr(err)}")
                 return False
             
-            # Set runtime parameters
+            # Set runtime parameters for surgical precision
             self.runtime_params = sl.RuntimeParameters()
-            self.runtime_params.confidence_threshold = 50
+            self.runtime_params.confidence_threshold = 50  # Balanced confidence for surgery
+            self.runtime_params.texture_confidence_threshold = 100
+            self.runtime_params.remove_saturated_areas = True
             
             self.is_connected = True
             
@@ -111,7 +116,8 @@ class ZEDSDKCamera:
             print(f"  - Resolution: {res.width}×{res.height}")
             print(f"  - Depth mode: {self.depth_mode}")
             print(f"  - FPS: {self.fps}")
-            print(f"  - Max depth: {self.depth_max_distance}m")
+            print(f"  - Surgical range: 20cm - 50cm")
+            print(f"  - Confidence: 50% (balanced precision)")
             
             return True
             

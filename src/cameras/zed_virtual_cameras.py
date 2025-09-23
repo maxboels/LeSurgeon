@@ -83,7 +83,7 @@ class ZEDCameraManager:
         self.zed_camera = ZEDSDKCamera(
             resolution="HD720",
             depth_mode="NEURAL_PLUS",  # High precision for surgery
-            depth_max_distance=1.0,   # 1m max range for surgical workspace
+            depth_max_distance=0.5,  # 50cm max for surgical range
             fps=30
         )
         
@@ -275,14 +275,14 @@ class ZEDDepthCamera(ZEDVirtualCamera):
         # Handle invalid depth values (NaN, inf)
         valid_mask = np.isfinite(depth_mm) & (depth_mm > 0)
         
-        # Clamp to surgical range (200mm to 1000mm = 20cm to 1m)
-        depth_clamped = np.clip(depth_mm, 200, 1000)
+        # Clamp to surgical range (200mm to 500mm = 20cm to 50cm)
+        depth_clamped = np.clip(depth_mm, 200, 500)
         
         # Only process valid depths
         depth_normalized = np.zeros_like(depth_clamped, dtype=np.uint8)
         if np.any(valid_mask):
             valid_depths = depth_clamped[valid_mask]
-            normalized_valid = ((valid_depths - 200) / (1000 - 200) * 255).astype(np.uint8)
+            normalized_valid = ((valid_depths - 200) / (500 - 200) * 255).astype(np.uint8)
             depth_normalized[valid_mask] = normalized_valid
         
         # Convert to 3-channel for compatibility
