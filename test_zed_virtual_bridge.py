@@ -223,6 +223,9 @@ class ZEDVirtualBridge:
                         left_bgr = cv2.cvtColor(left_frame, cv2.COLOR_RGB2BGR)
                         self.processes['left_rgb'].stdin.write(left_bgr.tobytes())
                         self.processes['left_rgb'].stdin.flush()
+                    except (BrokenPipeError, OSError) as e:
+                        # Silently ignore pipe errors - they're expected when no consumer
+                        pass
                     except Exception as e:
                         print(f"⚠️  Left RGB streaming error: {e}")
                 
@@ -232,6 +235,9 @@ class ZEDVirtualBridge:
                         depth_colored = self.process_depth_for_streaming(data['depth'])
                         self.processes['depth'].stdin.write(depth_colored.tobytes())
                         self.processes['depth'].stdin.flush()
+                    except (BrokenPipeError, OSError) as e:
+                        # Silently ignore pipe errors - they're expected when no consumer
+                        pass
                     except Exception as e:
                         print(f"⚠️  Depth streaming error: {e}")
                 

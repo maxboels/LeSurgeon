@@ -86,7 +86,17 @@ fi
 
 # Build camera configuration
 CAMERA_COUNT=2
-CAMERA_CONFIG="{ wrist: {type: opencv, index_or_path: /dev/video0, width: 640, height: 480, fps: 30}, stereo: {type: opencv, index_or_path: /dev/video2, width: 1344, height: 376, fps: 30}"
+CAMERA_CONFIG="{ wrist: {type: opencv, index_or_path: /dev/video0, width: 640, height: 480, fps: 30}"
+
+if [ "$USE_DEPTH" = true ]; then
+    # Use ZED cameras instead of conflicting stereo camera
+    CAMERA_CONFIG="${CAMERA_CONFIG}, zed_left: {type: opencv, index_or_path: /dev/video10, width: 1280, height: 720, fps: 30}, zed_depth: {type: opencv, index_or_path: /dev/video11, width: 1280, height: 720, fps: 30}"
+    CAMERA_COUNT=$((CAMERA_COUNT + 2))
+else
+    # Use regular stereo camera when no depth needed
+    CAMERA_CONFIG="${CAMERA_CONFIG}, stereo: {type: opencv, index_or_path: /dev/video2, width: 1344, height: 376, fps: 30}"
+    CAMERA_COUNT=$((CAMERA_COUNT + 1))
+fi
 
 if [ "$USE_WRIST_RIGHT" = true ]; then
     CAMERA_CONFIG="${CAMERA_CONFIG}, wrist_right: {type: opencv, index_or_path: /dev/video1, width: 640, height: 480, fps: 30}"
@@ -102,7 +112,12 @@ CAMERA_CONFIG="${CAMERA_CONFIG}}"
 
 echo "🎥 Camera Configuration ($CAMERA_COUNT cameras):"
 echo "  - Wrist Left: /dev/video0 (USB camera - close-up view)"
-echo "  - Stereo Feed: /dev/video2 (Raw concatenated left+right views)"
+if [ "$USE_DEPTH" = true ]; then
+    echo "  - ZED Left: /dev/video10 (ZED SDK left RGB)"
+    echo "  - ZED Depth: /dev/video11 (ZED SDK NEURAL_PLUS depth 20-50cm)"
+else
+    echo "  - Stereo Feed: /dev/video2 (Raw concatenated left+right views)"
+fi
 if [ "$USE_WRIST_RIGHT" = true ]; then
     echo "  - Wrist Right: /dev/video1 (USB camera - close-up view)"
 fi
