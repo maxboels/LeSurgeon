@@ -1,17 +1,30 @@
 #!/bin/bash
-# ZED Ultra-Short Range Surgical Teleoperation
-# ============================================
-# Uses your existing ZED virtual cameras with ultra-short range surgical configuration
+# 2-Camera Surgical Teleoperation Test
+# ====================================
+# Uses wrist camera + ZED raw concatenated feed (left+right views)
+# to test basic LeRobot teleoperation before adding virtual cameras.
+
+# Source the port detection utility
+source "$(dirname "$0")/../debug/detect_arm_ports.sh"
+
+echo "🔬 2-Camera Surgical Teleoperation Test"
+echo "======================================="
+echo "📷 Wrist: /dev/video0 (640x480)"
+echo "📷 ZED: /dev/video2 (1344x376 concatenated left+right)"
+echo "🧪 Testing basic teleoperation before virtual cameras"
+echo ""-Camera Surgical Teleoperation with ZED Integration
+# ====================================================
+# Uses wrist cameras + ZED virtual cameras with surgical range configuration
 # directly with LeRobot teleoperation system.
 
 # Source the port detection utility
 source "$(dirname "$0")/../debug/detect_arm_ports.sh"
 
-echo "🔬 ZED Ultra-Short Range Surgical Teleoperation"
-echo "==============================================="
-echo "📏 Range: 20-100cm (Ultra-short surgical precision)"
+echo "🔬 3-Camera Surgical Teleoperation with ZED"
+echo "============================================"
+echo "📏 ZED Range: 20-50cm (Surgical precision)"
 echo "🧠 ZED SDK: NEURAL_PLUS mode with 50% confidence"
-echo "🎯 Modalities: Left RGB, Right RGB, Depth, Confidence"
+echo "🎯 Cameras: Wrist Left + ZED Left RGB + ZED Depth"
 echo ""
 
 # Detect arm ports
@@ -29,76 +42,40 @@ echo ""
 # Activate LeRobot environment
 source .lerobot/bin/activate
 
-echo "🚀 Starting Advanced ZED Pipeline System..."
-echo "🎥 Creating virtual video devices: /dev/video10, /dev/video11, /dev/video12"
-python src/cameras/advanced_zed_pipeline.py &
-PIPELINE_PID=$!
-
-# Wait for pipelines to initialize
-echo "⏳ Waiting for ZED pipeline to initialize..."
-sleep 8
-
-# Verify virtual devices are created
-echo "🔍 Verifying virtual devices..."
-for device in /dev/video{10,11,12}; do
-    if [ -e "$device" ]; then
-        echo "✅ $device created"
-    else
-        echo "❌ $device not found"
-    fi
-done
-echo ""
-
 echo "🎥 Camera Configuration:"
-echo "  - Wrist Camera: /dev/video0 (U20CAM end-effector view)"
-echo "  - ZED Left RGB: /dev/video10 (ZED SDK processed left eye)"
-echo "  - ZED Right RGB: /dev/video11 (ZED SDK processed right eye)" 
-echo "  - ZED Depth: /dev/video12 (ZED SDK neural depth 20-100cm)"
+echo "  - Wrist Left: /dev/video0 (USB camera - close-up view)"
+echo "  - ZED Stereo: /dev/video2 (Raw concatenated left+right views)"
 echo ""
-echo "🔬 ZED SDK Processing:"
-echo "  - Neural depth processing (20-100cm surgical range)"
-echo "  - 50% confidence threshold for balanced precision"
-echo "  - Real-time left RGB, right RGB, depth, and confidence maps"
+echo "� No virtual cameras needed for this test"
 echo ""
 
-echo "🚀 Starting ZED Ultra-Short Range Teleoperation..."
+echo "🚀 Starting 2-Camera Teleoperation Test..."
 echo "📊 Recording interface will show:"
 echo "  1. Wrist camera (close-up surgical view)"
-echo "  2. ZED Left RGB (left eye processed view)"
-echo "  3. ZED Right RGB (right eye processed view)"
-echo "  4. ZED Depth (neural depth 20-45cm)"
+echo "  2. ZED stereo (concatenated left+right views)"
 echo ""
 echo "🎮 Controls:"
 echo "  - Move leader arm to control follower"
-echo "  - All camera streams will be recorded"
+echo "  - Both camera streams will be recorded"
 echo "  - Press Ctrl+C to stop"
 echo ""
 
-# Start teleoperation with wrist + ZED virtual cameras using 20-45cm surgical range
+# Start teleoperation with wrist + raw ZED cameras
 printf "\n\n" | python -m lerobot.teleoperate \
   --robot.type=so101_follower \
   --robot.port="$FOLLOWER_PORT" \
   --robot.id=lesurgeon_follower_arm \
-  --robot.cameras="{ wrist: {type: opencv, index_or_path: /dev/video0, width: 640, height: 480, fps: 30}, zed_left: {type: opencv, index_or_path: /dev/video10, width: 1280, height: 720, fps: 30}, zed_right: {type: opencv, index_or_path: /dev/video11, width: 1280, height: 720, fps: 30}, zed_depth: {type: opencv, index_or_path: /dev/video12, width: 1280, height: 720, fps: 30}}" \
+  --robot.cameras="{ wrist: {type: opencv, index_or_path: /dev/video0, width: 640, height: 480, fps: 30}, zed_stereo: {type: opencv, index_or_path: /dev/video2, width: 1344, height: 376, fps: 30}}" \
   --teleop.type=so101_leader \
   --teleop.port="$LEADER_PORT" \
   --teleop.id=lesurgeon_leader_arm \
   --display_data=true
 
 echo ""
-echo "✅ ZED Ultra-Short Range Surgical Teleoperation completed"
-
-# Cleanup ZED pipeline
-echo "🧹 Cleaning up ZED pipeline..."
-if [ ! -z "$PIPELINE_PID" ]; then
-    kill $PIPELINE_PID 2>/dev/null || true
-    echo "✅ ZED pipeline stopped"
-fi
+echo "✅ 2-Camera Teleoperation Test completed"
 
 echo "📁 Recorded data includes:"
 echo "  - Wrist camera frames (surgical close-up)"
-echo "  - ZED Left RGB (processed left eye view)"
-echo "  - ZED Right RGB (processed right eye view)"
-echo "  - ZED Depth (neural depth 20-100cm surgical range)"
+echo "  - ZED stereo frames (concatenated left+right views)"
 echo "  - Robot joint positions and actions"
-echo "  - Timestamps synchronized across all modalities"
+echo "  - Timestamps synchronized across modalities"
