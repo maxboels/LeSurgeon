@@ -1,5 +1,15 @@
 #!/bin/bash
-# LeSurgeon - Convenience Commands
+# LeSurgeon - Convenienc    "Development:"
+    echo "  wandb        - Setup Weights & Biases"
+    echo "  test         - Test robot connection"
+    echo "  test-cameras - Test camera system reorganization"
+    echo ""
+    echo "Enhanced Features:"
+    echo "  💡 Use --enhanced-zed flag with record/inference for ZED 2 stereo camera"
+    echo "  💡 Use --zed-resolution [fast|hd|fhd] to set ZED quality mode"
+    echo ""
+    echo "Usage: ./lesurgeon.sh <command>"
+    echo ""ands
 # ===============================
 # Quick access to common robotics tasks
 
@@ -22,7 +32,7 @@ show_help() {
     echo "Operation:"
     echo "  teleoperate  - Start teleoperation session"
     echo "  teleop-auto  - Start teleoperation (auto-confirm calibration)"
-    echo "  teleop-cam   - Start teleoperation with U20CAM-1080p camera"
+    echo "  teleop-cam   - Start teleoperation with camera (U20CAM or ZED 2 stereo)"
     echo ""
     echo "Data & ML:"
     echo "  hf-setup     - Setup Hugging Face authentication"
@@ -37,6 +47,11 @@ show_help() {
     echo "Development:"
     echo "  wandb        - Setup Weights & Biases"
     echo "  test         - Test robot connection"
+    echo "  test-cameras - Test camera system reorganization"
+    echo ""
+    echo "Enhanced Features:"
+    echo "  💡 Use --enhanced-zed flag with record/inference for ZED 2 stereo camera"
+    echo "  💡 Use --zed-resolution [fast|hd|fhd] to set ZED quality mode"
     echo ""
     echo "Usage: ./lesurgeon.sh <command>"
     echo ""
@@ -76,7 +91,7 @@ case "${1:-help}" in
             1) bash config/calibration.sh # Run follower section only (now with dynamic port detection)
                ;;
             2) # Leader only calibration with dynamic port detection
-               source debug/detect_arm_ports.sh
+               source src/utils/detect_cameras.sh  # Updated path
                if detect_arm_ports; then
                    source .lerobot/bin/activate
                    lerobot-calibrate --teleop.type=so101_leader --teleop.port="$LEADER_PORT" --teleop.id=lesurgeon_leader_arm
@@ -93,7 +108,7 @@ case "${1:-help}" in
     
     "follower")
         echo "🔧 Calibrating follower arm with dynamic port detection..."
-        source debug/detect_arm_ports.sh
+        source src/utils/detect_cameras.sh  # Updated path
         if detect_arm_ports; then
             source .lerobot/bin/activate
             lerobot-calibrate --robot.type=so101_follower --robot.port="$FOLLOWER_PORT" --robot.id=lesurgeon_follower_arm
@@ -104,7 +119,7 @@ case "${1:-help}" in
     
     "leader")
         echo "🔧 Calibrating leader arm with dynamic port detection..."
-        source debug/detect_arm_ports.sh
+        source src/utils/detect_cameras.sh  # Updated path
         if detect_arm_ports; then
             source .lerobot/bin/activate
             lerobot-calibrate --teleop.type=so101_leader --teleop.port="$LEADER_PORT" --teleop.id=lesurgeon_leader_arm
@@ -134,6 +149,12 @@ except Exception as e:
 "
         ;;
     
+    "test-cameras")
+        echo "🧪 Testing camera system reorganization..."
+        source .lerobot/bin/activate
+        python test_camera_reorganization.py
+        ;;
+    
     "teleoperate")
         echo "🎮 Starting teleoperation session..."
         echo "Make sure both robots are connected and calibrated!"
@@ -149,7 +170,7 @@ except Exception as e:
         ;;
     
     "teleop-cam")
-        echo "🎮 Starting teleoperation with U20CAM-1080p camera..."
+        echo "🎮 Starting teleoperation with camera (U20CAM or ZED 2 stereo)..."
         echo "Make sure both robots and camera are connected!"
         source .lerobot/bin/activate
         bash run/teleoperate_with_camera.sh

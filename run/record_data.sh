@@ -3,9 +3,10 @@
 # ==============================
 # Records teleoperation data for training ML models
 
-# Source environment variables and port detectioRECORD_CMD="$RECORD_CMD --robot.cameras=\"{ wrist: {type: opencv, index_or_path: /dev/video0, width: 1920, height: 1080, fps: 30}, external: {type: opencv, index_or_path: /dev/video2, width: 1920, height: 1080, fps: 30}}\""
+# Source environment variables and camera detection
 source "$(dirname "$0")/../.env"
 source "$(dirname "$0")/../debug/detect_arm_ports.sh"
+source "$(dirname "$0")/../src/utils/detect_cameras.sh"
 
 # Colors for output
 RED='\033[0;31m'
@@ -34,6 +35,8 @@ show_usage() {
     echo "  -d, --dataset NAME     Dataset name (default: '$DEFAULT_DATASET_NAME')"
     echo "  --episode-time SEC     Episode duration in seconds (default: $DEFAULT_EPISODE_TIME)"
     echo "  --reset-time SEC       Reset time between episodes in seconds (default: $DEFAULT_RESET_TIME)"
+    echo "  --enhanced-zed         Use ZED multi-modal recording (RGB + depth + 3D points)"
+    echo "  --zed-resolution MODE  ZED resolution: fast/hd/fhd (default: hd, only with --enhanced-zed)"
     echo "  -r, --resume           Resume existing dataset (add more episodes)"
     echo "  --delete               Delete existing dataset and start fresh"
     echo "  -h, --help            Show this help message"
@@ -43,6 +46,7 @@ show_usage() {
     echo "  $0 -n 10 -t 'Pick and place cube'    # Custom episodes and task"
     echo "  $0 -d my-dataset -n 3                # Custom dataset name"
     echo "  $0 --episode-time 90 --reset-time 45 # Custom timing (90s episodes, 45s reset)"
+    echo "  $0 --enhanced-zed --zed-resolution hd # Enhanced ZED with depth + 3D data"
     echo "  $0 -r -n 3                           # Resume existing + 3 more episodes"
     echo "  $0 --delete                          # Delete existing and start fresh"
     echo ""
@@ -66,6 +70,8 @@ EPISODE_TIME=$DEFAULT_EPISODE_TIME
 RESET_TIME=$DEFAULT_RESET_TIME
 RESUME_RECORDING=false
 DELETE_EXISTING=false
+ENHANCED_ZED=false
+ZED_RESOLUTION="hd"
 
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -87,6 +93,14 @@ while [[ $# -gt 0 ]]; do
             ;;
         --reset-time)
             RESET_TIME="$2"
+            shift 2
+            ;;
+        --enhanced-zed)
+            ENHANCED_ZED=true
+            shift
+            ;;
+        --zed-resolution)
+            ZED_RESOLUTION="$2"
             shift 2
             ;;
         -r|--resume)
@@ -158,6 +172,27 @@ if [ -d "$DATASET_PATH" ]; then
     fi
 fi
 
+# Detect camera configuration
+echo -e "${YELLOW}📷 Detecting camera setup...${NC}"
+if export_camera_config; then
+    if [ "$ENHANCED_ZED" = true ]; then
+        if [[ "$CAMERA_MODE" == "zed_multimodal" || "$CAMERA_MODE" == "hybrid" ]]; then
+            echo -e "${GREEN}✅ Enhanced ZED mode: Multi-modal recording (RGB + depth + 3D)${NC}"
+            echo "   Resolution: $ZED_RESOLUTION"
+            CAMERA_DESCRIPTION="$CAMERA_DESCRIPTION (Enhanced Multi-Modal)"
+        else
+            echo -e "${YELLOW}⚠️  Enhanced ZED requested but ZED camera not available${NC}"
+            echo "   Falling back to standard camera configuration"
+            ENHANCED_ZED=false
+        fi
+    else
+        echo -e "${GREEN}✅ Camera setup: $CAMERA_DESCRIPTION${NC}"
+    fi
+else
+    echo -e "${RED}❌ No compatible cameras detected${NC}"
+    exit 1
+fi
+
 # Display recording configuration
 echo -e "${CYAN}📊 Recording Configuration:${NC}"
 echo "  - Episodes:    $NUM_EPISODES"
@@ -165,7 +200,7 @@ echo "  - Task:        $TASK_DESCRIPTION"
 echo "  - Dataset:     ${HF_USER}/${DATASET_NAME}"
 echo "  - Episode Time: ${EPISODE_TIME}s"
 echo "  - Reset Time:   ${RESET_TIME}s"
-echo "  - Cameras:     /dev/video0 (wrist), /dev/video2 (external) @ 1920x1080 30fps"
+echo "  - Cameras:     $CAMERA_DESCRIPTION"
 echo ""
 
 # Display keyboard controls
@@ -195,7 +230,7 @@ RECORD_CMD="lerobot-record"
 RECORD_CMD="$RECORD_CMD --robot.type=so101_follower"
 RECORD_CMD="$RECORD_CMD --robot.port=\"$FOLLOWER_PORT\""
 RECORD_CMD="$RECORD_CMD --robot.id=lesurgeon_follower_arm"
-RECORD_CMD="$RECORD_CMD --robot.cameras=\"{ wrist: {type: opencv, index_or_path: /dev/video0, width: 1280, height: 720, fps: 30}, external: {type: opencv, index_or_path: /dev/video2, width: 1280, height: 720, fps: 30}}\""
+RECORD_CMD="$RECORD_CMD --robot.cameras=\"$CAMERA_CONFIG\""
 RECORD_CMD="$RECORD_CMD --teleop.type=so101_leader"
 RECORD_CMD="$RECORD_CMD --teleop.port=\"$LEADER_PORT\""
 RECORD_CMD="$RECORD_CMD --teleop.id=lesurgeon_leader_arm"

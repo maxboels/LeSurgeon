@@ -17,6 +17,8 @@ NC='\033[0m' # No Color
 # Default values
 DEFAULT_POLICY_TYPE="act"
 DEFAULT_DEVICE="cuda"
+DEFAULT_DATASET_NAME="lesurgeon-suture-npp50"
+DEFAULT_BATCH_SIZE="8"
 
 show_usage() {
     echo -e "${BLUE}🧠 Policy Training${NC}"
@@ -28,19 +30,22 @@ show_usage() {
     echo "  -d, --dataset NAME     Dataset name (default: from .env)"
     echo "  -p, --policy TYPE      Policy type (default: $DEFAULT_POLICY_TYPE)"
     echo "  -v, --device DEVICE    Training device (default: $DEFAULT_DEVICE)"
+    echo "  -b, --batch-size SIZE  Batch size (default: $DEFAULT_BATCH_SIZE)"
     echo "  -r, --resume           Resume from checkpoint"
     echo "  -h, --help            Show this help message"
     echo ""
     echo "Examples:"
     echo "  $0                                    # Train with defaults"
     echo "  $0 -d my-dataset -p act              # Train ACT policy"
+    echo "  $0 -b 2                               # Train with batch size 2"
     echo "  $0 -r                                 # Resume training"
 }
 
 # Parse command line arguments
-DATASET_NAME="${DEFAULT_DATASET_NAME:-lesurgeon-recordings}"
+DATASET_NAME="${DEFAULT_DATASET_NAME}"
 POLICY_TYPE="$DEFAULT_POLICY_TYPE"
 DEVICE="$DEFAULT_DEVICE"
+BATCH_SIZE="$DEFAULT_BATCH_SIZE"
 RESUME=false
 
 while [[ $# -gt 0 ]]; do
@@ -55,6 +60,10 @@ while [[ $# -gt 0 ]]; do
             ;;
         -v|--device)
             DEVICE="$2"
+            shift 2
+            ;;
+        -b|--batch-size)
+            BATCH_SIZE="$2"
             shift 2
             ;;
         -r|--resume)
@@ -93,6 +102,7 @@ echo -e "${CYAN}🎯 Training Configuration:${NC}"
 echo "  - Dataset:    ${HF_USER}/${DATASET_NAME}"
 echo "  - Policy:     $POLICY_TYPE"
 echo "  - Device:     $DEVICE"
+echo "  - Batch Size: $BATCH_SIZE"
 echo "  - Job Name:   $JOB_NAME"
 echo "  - Output:     $OUTPUT_DIR"
 echo "  - Resume:     $RESUME"
@@ -127,6 +137,7 @@ else
     lerobot-train \
         --dataset.repo_id="${HF_USER}/${DATASET_NAME}" \
         --policy.type="$POLICY_TYPE" \
+        --batch_size="$BATCH_SIZE" \
         --output_dir="$OUTPUT_DIR" \
         --job_name="$JOB_NAME" \
         --policy.device="$DEVICE" \
