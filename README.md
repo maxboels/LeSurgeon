@@ -106,8 +106,12 @@ source setup/activate_lerobot.sh     # Keeps you in activated environment with (
 - **debug/** - Diagnostic and troubleshooting tools
   - `diagnose_motors.py` - Motor diagnostic script
   - `simple_motor_check.py` - Simple motor position checker
+  - `zed_experiments/` - ZED camera development and experimental scripts
+- **src/** - Source code and production modules
+  - `cameras/` - Camera integration modules (ZED SDK, multimodal capture)
+  - `zed_tests/` - ZED camera testing scripts
 - **docs/** - Documentation and guides
-- **stl_files/** - 3D models and G-code files
+- **setup/** - Environment setup scripts (includes ZED SDK installer)
 - **.lerobot/** - Python virtual environment (ignored by git)
 
 ### Robot Operations
@@ -138,6 +142,49 @@ bash run/teleoperate_with_camera.sh  # Direct camera command
 **Check Robot Status:**
 ```bash
 ./lesurgeon.sh status         # Check calibration and connection status
+```
+
+### ZED Camera Operations
+
+**Ultra-Short Range Surgical Configuration:**
+The ZED 2 camera has been optimized for surgical robotics with ultra-short range depth perception:
+- **Range**: 20-45cm (optimized for surgical workspace)
+- **Precision**: ±44mm surgical-grade accuracy
+- **Frame Rate**: 10.3 FPS real-time processing
+- **Modalities**: RGB stereo (left/right), depth map, confidence map
+
+**Live Multi-Modal Display:**
+```bash
+# Run real-time 4-view surgical display (RGB left/right, depth, confidence)
+python debug/zed_experiments/live_surgical_multimodal.py
+```
+
+**ZED Camera Integration with LeRobot:**
+The ZED camera provides 6 modalities for surgical robotics:
+1. Wrist camera view (U20CAM-1080p)
+2. ZED left eye RGB  
+3. ZED right eye RGB
+4. ZED depth map (20-45cm optimized)
+5. ZED confidence map
+6. ZED point cloud (optional)
+
+**ZED Teleoperation:**
+```bash
+./lesurgeon.sh teleop-zed     # ZED multi-modal teleoperation (coming soon)
+# OR manually:
+bash run/teleoperate_zed_multimodal.sh  # ZED-enabled teleoperation
+```
+
+**ZED Testing and Development:**
+```bash
+# Test ZED SDK installation
+python src/zed_tests/test_zed_sdk_installation.py
+
+# Test multi-modal capture
+python src/zed_tests/test_zed_multimodal_display.py
+
+# Ultra-short range configuration
+python debug/zed_experiments/zed_ultra_short_range.py
 ```
 
 ### Machine Learning Workflow
