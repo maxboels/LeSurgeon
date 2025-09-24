@@ -31,7 +31,7 @@ printf "\n\n" | python -m lerobot.teleoperate \
     --robot.type=so101_follower \
     --robot.port="$FOLLOWER_PORT" \
     --robot.id=lesurgeon_follower_arm \
-    --robot.cameras="{ wrist: {type: opencv, index_or_path: /dev/video0, width: 1280, height: 720, fps: 30}, external: {type: opencv, index_or_path: /dev/video2, width: 2560, height: 720, fps: 30}}" \
+    --robot.cameras="{ wrist: {type: opencv, index_or_path: /dev/video0, width: 1280, height: 720, fps: 30}, external: {type: opencv, index_or_path: /dev/video2, width: 1280, height: 720, fps: 30}}" \
     --teleop.type=so101_leader \
     --teleop.port="$LEADER_PORT" \
     --teleop.id=lesurgeon_leader_arm \

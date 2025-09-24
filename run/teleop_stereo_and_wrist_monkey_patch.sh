@@ -123,7 +123,7 @@ fi
 
 # Build camera configuration (same as before)
 CAMERA_COUNT=2
-CAMERA_CONFIG="{ wrist: {type: opencv, index_or_path: /dev/video0, width: 640, height: 480, fps: 30}, stereo: {type: opencv, index_or_path: /dev/video2, width: 1344, height: 376, fps: 30}"
+CAMERA_CONFIG="{ wrist: {type: opencv, index_or_path: /dev/video0, width: 640, height: 480, fps: 30}, stereo: {type: opencv, index_or_path: /dev/video2, width: 640, height: 376, fps: 30}"
 
 if [ "$USE_WRIST_RIGHT" = true ]; then
     CAMERA_CONFIG="${CAMERA_CONFIG}, wrist_right: {type: opencv, index_or_path: /dev/video1, width: 640, height: 480, fps: 30}"
