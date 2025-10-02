@@ -98,6 +98,9 @@ wandb/
 logs/
 runs/
 outputs/
+# But include documentation images
+!outputs/*.png
+!outputs/**/*.png
 checkpoints/
 results/
 
