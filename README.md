@@ -1,5 +1,35 @@
 # LeSurgeon - LeRobot Development Environment
 
+
+**ZED Camera Integration with LeRobot:**
+The ZED camera provides 6 modalities for surgical robotics:
+1. Wrist camera view (U20CAM-1080p)
+2. ZED left eye RGB  
+3. ZED right eye RGB
+4. ZED depth map (20-45cm optimized)
+5. ZED confidence map
+6. ZED point cloud (optional)
+
+<table>
+<tr>
+<td><img src="outputs/ZED Left RGB_screenshot_23.09.2025.png" alt="ZED Left RGB" width="400"/></td>
+<td><img src="outputs/ZED Right RGB_screenshot_23.09.2025.png" alt="ZED Right RGB" width="400"/></td>
+</tr>
+<tr>
+<td align="center"><i>ZED Left Eye RGB</i></td>
+<td align="center"><i>ZED Right Eye RGB</i></td>
+</tr>
+<tr>
+<td><img src="outputs/ZED Depth_screenshot_23.09.2025.png" alt="ZED Depth" width="400"/></td>
+<td><img src="outputs/Confidence Map_screenshot_23.09.2025.png" alt="Confidence Map" width="400"/></td>
+</tr>
+<tr>
+<td align="center"><i>Depth Map (Color-coded distances)</i></td>
+<td align="center"><i>Confidence Map (Depth accuracy)</i></td>
+</tr>
+</table>
+
+
 ## 🤖 LeRobot Environment Setup
 
 This project includes a complete LeRobot development environment with Python 3.10 and all required dependencies.
@@ -17,6 +47,7 @@ This activates the environment in your current shell - you'll see `(.lerobot)` i
 ./lesurgeon.sh activate
 ```
 This shows environment information but returns you to your original shell when finished.
+
 
 ### Quick Start
 
@@ -132,6 +163,10 @@ bash run/teleoperate.sh       # Direct standard command
 bash run/teleoperate_with_camera.sh  # Direct camera command
 ```
 
+![LeSurgeon Surgical Robotics](outputs/ZED%20Surgical%20Cameras%20(Add-on)_screenshot_24.09.2025.png)
+*Dual robotic arms with ZED stereo depth sensing for surgical training*
+
+
 **Data Recording:**
 ```bash
 ./lesurgeon.sh record        # Interactive data recording with camera
@@ -153,20 +188,14 @@ The ZED 2 camera has been optimized for surgical robotics with ultra-short range
 - **Frame Rate**: 10.3 FPS real-time processing
 - **Modalities**: RGB stereo (left/right), depth map, confidence map
 
+![Surgical Depth View](outputs/Surgical%20Depth%20(15-45cm)_screenshot_23.09.2025.png)
+*Surgical workspace depth sensing optimized for 15-45cm range*
+
 **Live Multi-Modal Display:**
 ```bash
 # Run real-time 4-view surgical display (RGB left/right, depth, confidence)
 python debug/zed_experiments/live_surgical_multimodal.py
 ```
-
-**ZED Camera Integration with LeRobot:**
-The ZED camera provides 6 modalities for surgical robotics:
-1. Wrist camera view (U20CAM-1080p)
-2. ZED left eye RGB  
-3. ZED right eye RGB
-4. ZED depth map (20-45cm optimized)
-5. ZED confidence map
-6. ZED point cloud (optional)
 
 **ZED Teleoperation:**
 ```bash

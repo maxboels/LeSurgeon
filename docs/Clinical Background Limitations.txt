@@ -1,0 +1,226 @@
+Clinical Background
+Limitations of Traditional Open Surgery Training. Open surgical skills (e.g. knot-tying, wound closure) are recognized as core competencies for medical graduates, yet training is highly variable and often insufficient. For example, a UK-wide survey found that 86.5% of students reported inadequate suturing training during medical school[1]. Historically an apprenticeship model, undergraduate surgery teaching “lacks structure, quality and uniformity”[2]. Many schools have no standardized curriculum for suturing: one review noted that only about one-quarter of UK medical schools formally include basic suturing in the curriculum[3][1]. In practice, student exposure to open cases is limited (even more so with duty-hour restrictions), and much suturing practice occurs ad-hoc or in short skills workshops. Assessments remain largely subjective: trainees are evaluated by expert observation and checklists, but these “often lack precision and reproducibility”[4]. Thus there is wide inter-instructor variability and little formal benchmarking of skill.
+Several specific challenges are noted in recent studies. First, limited clinical exposure – fewer open procedures (as minimally invasive surgery grows) – means students rarely get hands-on practice. One cohort study noted that the rise of laparoscopic/robotic procedures has “eroded exposure of general surgery residents to open operations,” implying an even greater gap for students[5]. Second, insufficient hands-on training time is common. A Dutch review reported student feedback of a “diminishing” operative curriculum, and many courses aim just to “increase students’ procedural confidence”[6]. Third, variable faculty and resources limit practice. A systematic review of suturing courses found that most relied on low-cost synthetic bench models in labs, but only a few used cadaver or live tissue[7][8]. Non-expert instructors (senior students or residents) can help, but expert faculty are scarce[7].
+Finally, skill assessment is inconsistent. While many studies use the Objective Structured Assessment of Technical Skills (OSATS) rating scale or simple checklists, the lack of a single standard means results can’t be easily compared across programs[9]. In short, global practice is uneven: UK and Europe have national curricula (GMC’s “Tomorrow’s Doctors” in UK mandates suture skills) but no mandated hours or exams[1][2], while North America offers simulation curricula (e.g. ACS/ASE modules) but no universal competency checks at the student level. In developing regions, the gap is even larger. As one review notes, only a handful of studies (from countries as diverse as Ethiopia, Brazil, Korea) even address undergraduate suturing training, underscoring a lack of widespread standards[10][2].
+Comparisons with Minimally Invasive and Robotic Training. By contrast, laparoscopic and robotic skills training is more structured at all levels. For example, laparoscopic fundamentals are taught via validated simulators and exams (FLS/FES), and many med schools introduce students to virtual laparoscopy. Robotic skills likewise have training modules (e.g. da Vinci’s programs). These platforms incorporate metrics and certification, whereas open-surgery skills have no analogous standardized tests for novices. This discrepancy partly reflects the curriculum: open procedures are falling out of routine (as noted in[5]), so many programs emphasize MIS simulation. Nevertheless, basic open techniques remain essential (e.g. wound closure, trauma repair), so the imbalance creates a training gap.
+
+Major Challenges in Standardization and Assessment.
+Curricular Variability: There is no international consensus on teaching open technical skills. Institutions differ on whether and how to teach suturing, knot-tying or wound closure. Surveys show wide heterogeneity even within countries[1][2]. This means students graduate with very different experiences.
+Limited Practice Opportunities: Students get few supervised opportunities in the OR. Working-hour limits, fewer open cases, and competing curricular demands all reduce practice time. Many students report insufficient hands-on repetition to reach proficiency[1][4].
+Subjective Assessment: Without objective metrics, evaluations rely on faculty observation or checklists. This can be inconsistent – one study noted that even simple suturing was judged differently by surgeons vs. non-surgeons[11]. The commonly used OSATS checklist is reliable, but scoring still depends on the rater. A 2022 review found OSATS was the most common outcome measure in studies, but even OSATS ratings can vary between evaluators[10].
+Skill Retention: Studies repeatedly show that skills decay unless reinforced. For example, O’Connor et al. found that distributed practice over weeks was far better for retention than a single teaching session[12]. In other words, a one-off workshop may boost confidence temporarily, but skills fade without ongoing practice. Many curricula lack follow-up.
+These challenges are magnified by resource issues. Cadaver or animal labs provide realistic feel but are costly and logistically difficult. Bench models (e.g. foam pads, synthetic skins) are inexpensive and portable, and in trials both “dry” (synthetic) and “wet” (animal/cadaveric) models yielded positive skill gains[7][8]. However, wet models require anatomy labs and raise ethical/cost barriers, whereas dry models (e.g. PVC, silicone pads) may not feel lifelike. In practice, almost all student courses use dry kits[7], but without a standard fidelity level there is still variability.
+Emerging Solutions and Innovations
+Educators have explored many remedies to these gaps:
+Simulation-Based Training: Skills labs and workshops are increasingly common. For example, dedicated courses (often 1–2 days) led by faculty have been shown to significantly improve suturing performance. A BMC Medical Ed study of a Korean one-day course reported positive feedback and measured skill gains[2]. Similarly, American medical schools rapidly developed remote/virtual curricula during COVID-19: one study taught 3D-printed suturing kits via live video coaching, and students showed significant confidence and skill improvement[13]. Such distance-learning models indicate that even when in-person contact is limited, interactive video and home practice can be effective. In general, simulation (dry bench models, home practice kits, simple task trainers) safely lets students make mistakes and repeat tasks without patient risk[14][13].
+Competency-Based Curricula: Several professional bodies have begun defining core skills. In the US, the ACS/ASE Medical Student Simulation Curriculum outlines essential tasks (including suturing, knot-tying) that all graduates should master. Although uptake is voluntary, studies of its implementation suggest improved confidence[13]. In the UK/EU, curricula like “Tomorrow’s Doctors” and national surgical royal college exams (OSCE stations) enumerate basic technical skills. However, there is no uniformly mandated pass/fail test for suturing at graduation. Some institutions use high-stakes clerkship OSCEs to test closure on models, but again without a single standard metric. The shift towards competency-based education stresses mastery over time-served, which would favour more structured suture training – but in most schools this transition is incomplete.
+Structured Assessment Tools: To reduce subjectivity, educators use validated scales. The OSATS (global rating + checklist) is used in many studies[10] and is recommended for student practice as well. Other tools include objective structured clinical examinations (OSCE) with suturing stations, and final product analysis (measuring stitch spacing, consistency)[10][9]. Innovative approaches include instrumented simulators: for example, a research group developed a bench-top suturing model with force sensors, motion trackers, and cameras to capture metrics like applied forces and hand movements[15][4]. Early results show these sensors can distinguish novice vs. expert performance (attendings vs. residents) via quantifiable metrics[15][4]. In principle, such data-driven simulators could give learners instant feedback (e.g. “your needle angle was too steep”) and allow objective scoring. Similarly, computer vision algorithms are being piloted: video analysis tools can automatically evaluate needle path or knot tightness without a human rater[15][5]. These AI-based methods are still experimental, but point to future automated assessment.
+AR/VR and Haptic Innovations: Augmented reality (AR) overlays and virtual reality (VR) trainers are starting to enter open-surgery education. For instance, a 2022 RCT compared an AR suturing app to traditional instructional video for novices: both groups improved in knot/ suture skills, and students rated AR as “easy to use” and beneficial for learning instrument handling[16]. However, the study found no significant difference in post-test scores between AR and video teaching[16] – suggesting that while AR can engage learners, simpler video/remote teaching may be nearly as effective. Fully immersive VR with haptic feedback (force feedback through instruments) is used more in laparoscopic training, but some developers are adapting similar technology for open suturing. These high-tech simulators are promising, but currently are more common in research than routine student curricula.
+Distributed and Self-Directed Practice: Based on educational theory, many programs now encourage spaced practice. Rather than a single workshop, students are given suture kits and assignments to practice at home, with video or instructor check-back sessions. Studies show this approach pays off: courses that provided “distributed practice” (practice spread over weeks with intermittent feedback) achieved better long-term skill retention than one-time sessions[12]. One review explicitly concludes that effective suturing curricula should include early exposure (preclinical years) plus follow-up practice to “maintain skill level” through graduation[12]. Peer-assisted learning also helps: senior students or residents can tutor juniors in afternoon skills labs, multiplying instructor availability with minimal cost[17][18].
+Effectiveness of New Training Approaches. Published evaluations of these innovations are generally positive, though evidence is still emerging. In multiple studies, simulation courses reliably improve skill and confidence. For example, a 2017 American Journal of Surgery trial (“All for knots”) implemented a proficiency-driven suturing/suturing curriculum for third-year students and found significant gains in speed and quality[13]. The aforementioned one-day Korean course also showed skill improvements and high student satisfaction[2]. The remote COVID-era curriculum improved students’ self-rated confidence with knots and suturing by statistically significant margins[13], suggesting virtual coaching can substitute when in-person is impossible.
+Assessment innovations likewise show promise. Studies using the new data-rich simulator demonstrated that force/torque and motion metrics correlated with expertise – attending surgeons applied steadier force and smoother motion than novices[19]. In other words, objective measures can distinguish skill levels, an essential validity criterion. AR/VR approaches have been shown to be at least as good as traditional teaching: Nagayo et al. found AR training as effective as standard video instruction[16]. However, it’s worth noting that advanced tech (AR/VR, custom simulators) hasn’t yet proven vastly superior to well-designed low-tech teaching. In most trials, even simple home-practice with a video review yielded substantial improvements[13][16]. This suggests the pedagogical principles (deliberate practice, feedback, spaced repetition) may matter more than the gimmick.
+Skill decay remains a concern. Follow-up studies show that without reinforcement, students regress; one review found only 8 of 25 studies examined retention and noted that skills begin to decay within months[20]. This underscores that new curricula must ensure ongoing practice, not just a single session. In summary, while simulation and structured curricula have demonstrated effectiveness in controlled studies[2][13][19], sustained outcomes depend on continued practice and integration into the broader curriculum.
+Comparative Table: Assessment and Training Modalities
+Approach/Tool
+Description / Use
+Pros
+Cons / Evidence
+Dry Bench Models
+Synthetic suture pads or tissue. Used in lab sessions and take-home kits.
+Inexpensive, portable, repeatable practice[7]. Safe for novices.
+Widely used in studies, reliably improves skills (all studies with “dry” models saw positive outcomes)[7]. Less realistic feel than real tissue.
+Wet (Animal/Cadaver) Models
+Tissue simulators (pig feet, cadaver skin, etc.)
+Closer to live-tissue feel. Improves realism.
+Small number of studies (n=3) showed good skill gains with wet models[8]. Limitations: Expensive, limited availability, ethical/logistical issues.
+Standard Workshops/Bootcamps
+Short courses led by faculty (e.g. “skills day”). Utilizes guided practice with feedback.
+Structure ensures correct technique; good for motivation; immediate feedback.
+Consistently report skill gains and confidence boosts[2][13]. Time- and resource-intensive; gains fade without follow-up[12].
+Video/AR/Remote Training
+Instructional videos, AR apps, remote tele-mentoring.
+Highly scalable; self-paced; students can re-watch (“distributed practice”).[21] AR can highlight 3D motion.
+AR training was as effective as video instruction[16]. Remote live coaching improved confidence[13]. Does not provide tactile feedback unless combined with kit.
+Competency Curricula (OSATS/Checklist)
+Formal checklists or rating scales for evaluation (e.g. OSATS).
+Provides objective benchmarks; validated by research. Helps standardize exam scores[10][9].
+Can still be subjective; requires trained raters. If not regularly used by faculty, students may “teach to the test” rather than holistic skill.
+Instrumented Simulators (haptic/metric)
+High-tech box with force/motion sensors, computer vision (see image above).
+Can capture fine-grained objective data (force profiles, hand paths)[15]. Feedback can be automated.
+Still experimental, bulky and expensive. Clinical impact yet unproven outside research labs.
+
+
+In summary, open-surgery training for medical students suffers from inconsistent exposure and assessment, unlike the more regimented curricula for minimally invasive techniques. Audits and surveys indicate a clear training gap[1][7]. However, the field is responding with innovative solutions: simulation, structured curricula, and new assessment technologies are all on the rise. Published studies generally show these interventions improve early skill acquisition and confidence[2][13], especially when they incorporate deliberate, repeated practice. The challenge remains implementation: ensuring all students receive standardized teaching, and that skill assessments (like OSATS or new sensor-based metrics) are validated and widely adopted. As one review notes, a “standardised and effective framework” for teaching suturing must be developed[22]. With ongoing refinement (e.g. integrating AR tools, automated scoring, peer-assisted learning) and robust outcome tracking, the goal is to make basic open-surgery skills as reliably taught and assessed as modern laparoscopic procedures.
+
+AI and Robotics Background: Vision-Language-Action Models in Surgical Robotics
+Vision–Language–Action (VLA) models aim to combine visual input, language context, and action outputs to enable intelligent robotic behavior. In surgical robotics, recent work (2020–2025) has explored using VLA approaches for assistance, task understanding, and autonomous control. Key advances include learning from video demonstrations, extracting rich datasets, and integrating large vision–language models (VLMs) like CLIP or GPT-4V with robot policy networks. This section surveys the latest methods, datasets, and platforms, focusing on imitation learning and bimanual tasks in laparoscopic and open surgery.
+Data Collection and Annotation in Surgical Learning
+Annotated Surgical Videos: Expert surgeons’ operations are recorded with synchronized sensors. For example, the JIGSAWS dataset provides 76-dimensional kinematics and video of 101 trials (suturing, needle-passing, knot-tying) by six surgeons on a da Vinci Research Kit (dVRK)[1]. Other datasets like RARP-45 (robotic prostatectomy) record da Vinci video and kinematics. Surgical phase and gesture datasets (e.g. Cholec80, M2CAI, EndoVis) annotate steps and tool usage, often via manual labeling of video frames. Multimodal datasets such as RARP-45 and MM-OR include synchronized endoscopic video, tool labels, and external cameras for comprehensive scene annotation.
+Pose Estimation and Tracking: To train perception and control, recent efforts label instrument poses in video. The SurgPose dataset (ICRA 2025) uses painted markers on tools to annotate 7 key points on over 120K surgical instrument instances[2]. The MICCAI 2023 SurgRIPE challenge provides realistic surgical video with ground-truth 6‑DoF tool poses for markerless pose estimation[3]. For soft-tissue tracking, the SurgT benchmark (MICCAI 2022) released 157 stereo laparoscopic videos with bounding-box labels tracking tissue motion[4]. These large annotated video datasets enable training of deep networks for pose and segmentation.
+Action Segmentation and Multimodal Annotation: Experts also segment videos into sub-tasks or gestures. For instance, dissectors manually labeled cholecystectomy videos into dissection gestures and suturing phases[5][6]. Advanced tools (e.g. annotation GUIs or AI-assisted labeling) align video frames with robot kinematics and instrument detections. Some studies automatically segment actions by detecting tool-tissue contact or leveraging simulation. Overall, surgical datasets are extracted via a combination of manual annotation, sensor data fusion, and synthetic augmentation (e.g. generating realistic tissue scenarios via simulation[7]).
+Table 1. Key Surgical Datasets (Vision & Kinematics)
+Dataset
+Data Modalities
+Tasks / Content
+Source (Representative)
+JIGSAWS
+Stereo video + 76-D kinematics
+Suturing, knot-tying, needle-passing (6 surgeons on dVRK)[1]
+JHU/ISI (2015)[1]
+RARP-45
+Laparoscopic video + kinematics
+Robotic prostatectomy (Da Vinci Si)
+(Prostatectomy dataset)
+EndoVis
+Endoscopic video
+Tool segmentation, tracking (MICCAI challenges)
+MICCAI EndoVis (2017–2021)
+SurgT
+Stereo endoscopic video
+Soft-tissue tracking (bounding boxes)
+MICCAI SurgT (2023)[4]
+SurgPose
+RGB images of instruments
+2D keypoint poses of tools (7 joints)
+ICRA 2025[2]
+SurgRIPE
+Laparoscopic video + calibration data
+6-DoF instrument poses (markerless)
+MICCAI SurgRIPE 2023[3]
+Cholec80
+Endoscopic video
+Phase and tool annotations (80 cholecystectomies)
+JHU (2015)
+MM-OR
+OR video + audio + segmentation masks
+Panoptic segmentation of OR scenes
+CVPR 2021 Multimodal OR
+
+
+
+
+
+
+Simulation Platforms and Benchmarks
+Because collecting surgical data is expensive, many researchers use physics simulators or robotic testbeds.
+
+Fig. 2: SurRoL: An Open-source Reinforcement Learning Centered and dVRK Compatible Platform for Surgical Robot Learning.
+Key platforms include:
+dVRL: The da Vinci RL platform (arXiv 2019) provides Gym-like environments for the dVRK arm[8]. It offers standard tasks (peg transfer, ring placement) and allows testing RL algorithms with sim-to-real transfer.
+SurRoL: An extensible dVRK-compatible simulator from CUHK (IROS 2021)[9]. SurRoL includes dozens of tasks (needle picking, peg transfer, camera control) and supports recording human teleoperation via haptic devices. It has been used extensively for vision-based control and RL in surgical tasks[10][11]. Recent extensions include a high-fidelity soft-body simulation (Material Point Method) to model tissue deformation[11].
+AMBF: The Asynchronous Multi-Body Framework (JHU 2018) is an open-source simulation environment for medical robots. It integrates physics (Bullet, soft tissue) and allows teleoperation of da Vinci models. AMBF has been used to simulate deformable tissues and multimodal sensing.
+UnityFlex & NVIDIA FleX: Tagliabue et al. (2020) developed UnityFlexML, using Unity3D and NVIDIA FleX for particle-based tissue simulation. This platform enables soft-tissue manipulation tasks (cutting, suturing) in a game-like engine.
+Taichi Soft-Tissue Simulator: Yang et al. (2024) integrated a Taichi-based Material Point Method into SurRoL to simulate soft organs and sutures in real time[11]. This allows generation of surgical training data with realistic tissue physics, supporting RL/IL for tasks like suturing.
+
+
+Table 2. Surgical Robot Simulation Platforms
+Simulator (Ref)
+Features / Capabilities
+Used for Tasks / Benchmarking
+Citation
+dVRL (2019)
+OpenAI Gym-style interface for dVRK; Python API; basic peg/ring tasks
+RL baselines; policy prototyping; sim→real tests[8]
+Richter et al., 2019[8]
+SurRoL (2021– )
+dVRK-compatible 3D sim; extensive surgical task suite; human-in-loop teleop
+Vision-based IL/RL learning; peg transfer, bimanual tasks[9]
+Xu et al., 2021[10]; Yang et al., 2024[11]
+AMBF (2018)
+Multi-body sim with rigid & soft objects; ROS integration
+Deformable tissue manipulation; haptics
+Munawar et al., 2018
+UnityFlexML (2020)
+Unity engine + NVIDIA FleX for soft-body physics
+Simulated suturing, tissue cutting
+Tagliabue et al., 2020
+Taichi Soft Sim (2024)
+High-performance MPM for tissue; integrated into SurRoL
+Realistic deformable organ simulation
+Yang et al., 2024[11]
+
+These simulators enable large-scale data generation for training VLA models. Many recent works use SurRoL for collecting multimodal surgical trajectories[12][13]. For example, Fu et al. (ICRA 2024) simulated 10 tasks in SurRoL to train a goal-conditioned decision transformer[14][15].
+
+Imitation Learning and Bimanual Manipulation
+Imitation learning (IL) from expert demonstrations is a cornerstone of surgical automation. Modern IL methods use deep models (CNNs, Transformers, diffusion) to map video (and optionally kinematics) to robot control commands. Recent trends include:
+Vision Transformer Policies: Kim et al. (CoRL 2024) introduced Surgical Robot Transformer (SRT), a behavior-cloning model for the da Vinci. SRT takes stereo image input (from a camera or wrist camera) and predicts relative end-effector motions for both arms[16][17]. Crucially, SRT models actions relative to the current tool pose (not absolute), making it robust to the da Vinci’s imprecise kinematics[16][18]. On tasks like tissue lifting, needle pickup, and knot-tying, SRT achieved near-100% success. (The JHU press release reports it “performed the same surgical procedures as skillfully as human doctors”[19].)
+Sequence Models (ViT + LSTM): Other IL approaches use sequential learning. For example, Lu et al. (2025) created a synthetic kidney-tumor removal dataset and trained a Vision Transformer + LSTM policy to predict tool poses over time[7]. Their model extracts spatial features from each frame (ViT) and captures temporal dependencies (LSTM) to reproduce the expert’s multi-step procedure. This yielded ~0.5 cm error and ~70% success on moving a tumor in novel scenes.
+Hierarchical Skill Learning: Bimanual surgical tasks (e.g. peg transfer) are often long-horizon. Recent works break these into subtasks. Huang et al. (IROS 2023) proposed Value-informed Skill Chaining (ViSkill) to decompose a long task into learnable skills. ViSkill trains a value function to identify good transition states between subtasks, then chains individual RL policies for “pick”, “handover”, “place” to complete tasks[13]. Applied to SurRoL peg-transfer variants, this achieved high success by carefully aligning subtask endpoints.
+Decision Transformer (GPT-based) for Surgery: Fu et al. (ICRA 2024) introduced a Goal-Conditioned GPT Decision Transformer. They treat surgical tasks as sequence modeling problems and use a GPT-like transformer to encode the history of states/actions, conditioning on a high-level goal[20]. A cross-task pretraining strategy (predicting future dynamics and time-to-goal) helped the model generalize across 10 tasks in SurRoL. This approach leverages the “strong reasoning capability” of GPT architectures to plan multi-step manipulations[20].
+Relative vs. Absolute Actions: Both theory and experiments show relative motions are crucial. Kim et al. demonstrated that tool-centric or hybrid-relative action frames dramatically improve IL on dVRK[16][18]. For example, outputting motions relative to the wrist camera or tool frame cancels out kinematic errors. In extensive tests, hybrid-relative policies (translation in camera frame, rotation in tool frame) achieved much higher success than absolute commands[18][16]. This insight is now widely adopted: IL models often predict Δ-position/Δ-orientation rather than absolute poses.
+Imitation from Video Archives: Notably, SRT and related works rely only on video inputs (wrist cameras) and do not require precise robot state during inference[21][16]. For training, kinematics (even approximate) may be used as supervision. The large archives of da Vinci surgical videos worldwide can thus serve as rich IL datasets: JHU’s team trained on hundreds of real surgery videos[21]. This video-to-action learning is a major advance toward scalable robot automation.
+Vision–Language Integration in Surgical Policies
+Recent approaches combine visual perception with language models to improve reasoning and flexibility:
+Surgical Vision–Language Models: Outside direct control, vision–language models are used for scene understanding. GP-VLS (Stanford/JHU, 2024) is a general-purpose VLM trained on medical text and surgical images. It uses a CLIP-based vision encoder (ViT-L/14) to extract image features and a large language model to answer questions about surgical scenes[22]. GP-VLS outperformed previous surgical VQA baselines on tasks like tool counting and phase questions, demonstrating that foundation models can interpret laparoscopic videos[23][22].
+Hierarchical Language Plans (SRT-H): Kim et al. (2025) extended SRT to a hierarchical VLA framework (SRT-H)[24]. A high-level policy operates in language space: it observes images and generates textual instructions (e.g. “clip duct”, “cut duct”). A low-level policy then takes these language prompts plus vision input to produce continuous actions[24][25]. SRT-H was tested on ex vivo gallbladder surgeries (cholecystectomy) with no human intervention, achieving 100% success on 8 unseen specimens[24]. This shows that conditioning on language instructions allows flexible correction and decomposition of long procedures.
+Integrating VLMs (CLIP, GPT-4V, etc.): There is active interest in plugging off-the-shelf VLMs into robot control. For example, GP-VLS uses a frozen CLIP visual backbone to encode inputs[22]. In SRT-H, Ji et al. experimented with GPT-4o (a GPT-4 variant with vision) as the high-level planner. However, they found general VLMs lack surgical domain knowledge: GPT-4o “shows significant shortcomings in domain-specific understanding” (e.g. misordering clipping steps)[26]. This suggests the need for fine-tuning or specialized models. Other works (vision-language-action surveys) note trends like CLIP-guided affordance learning or instruction-guided policies, though specific surgical examples remain early.
+Policy Architectures: In practice, vision-language-action models are often implemented as multi-modal networks. For instance, the SRT-H low-level policy encodes images with EfficientNet and conditions on language via a transformer decoder[25]. Fu et al. (ICRA 2024) embed task-goals into a GPT-based decision transformer that reasons over state sequences[20]. Such designs highlight the merging of language-model ideas (transformers, autoregressive outputs) with classical robot learning (supervised BC or RL).
+In summary, surgical VLA models are moving from purely vision-based IL toward language-informed policies. Hybrid models can leverage textual task descriptions or predictions to guide robot actions. While most current work has language implicitly (via LLM architectures or generating text instructions), future directions will likely involve explicit language inputs (e.g. surgeon commands) and large multi-modal pretraining for surgical knowledge.
+Applications: Real and Simulated Surgery
+Real-world (da Vinci system): The most impressive demonstrations involve real surgical robots. For example, the SRT model (JHU/Stanford) controlled a da Vinci arm to autonomously lift tissue, grasp needles, and suture knots. The learned policies matched expert performance: “the robot trained on the model performed the same procedures as skillfully as human doctors”[19]. Similarly, SRT-H achieved full automation of cholecystectomy steps on ex vivo tissue, without human intervention, achieving 100% success on all test cases[24]. These results required only camera images (including optional wrist cameras) as input; the model learned to output robot joint velocities or Cartesian deltas directly. Notably, adding wrist cameras improved depth perception and generalization[16].
+Simulation (dVRK / SurRoL): Many methods are developed and benchmarked in simulation. For instance, Fu et al. demonstrated that their GPT decision transformer could solve 10 different SurRoL tasks (peg transfer, needle alignment, block stacking, etc.) with better performance than baselines[20]. Huang et al. showed that ViSkill could chain skills to complete 3 simulated long-horizon tasks (e.g. 3-step peg transfer) with higher success than prior skill chaining methods[13]. These works report high success rates (>80–90%) on SurRoL tasks, and often validate policies on the real dVRK to confirm transferability[27][28].
+Performance Highlights: - Knot-tying: SRT achieved success on complex bimanual knot-tying (5/5 trials) in simulation by using hybrid-relative commands[29][16].
+- Needle handling: Using wrist cameras, SRT generalized needle pickup even in novel contexts[16].
+- Peg transfer: ViSkill connected “pick/hand/put” policies smoothly, significantly improving over naïve chaining[13].
+- Full surgery: SRT-H’s end-to-end test on gallbladder dissection (with GPT-based planning) marks a first step toward autonomous laparoscopic procedures[24].
+Common Tasks: Both real and sim experiments focus on fundamental surgical gestures: peg transfer, ring passing, tool pickup, suturing, etc. These bimanual tasks test coordination and fine manipulation. VLA models have begun to handle multi-step procedures by learning from many demonstrations.
+Trends and Challenges
+Imitation vs. Reinforcement: While IL has enabled rapid progress on specific tasks, it relies on high-quality demonstrations. Collecting diverse demonstrations (multiple tissues, lighting, surgeon styles) remains challenging. Thus many efforts supplement IL with RL (ViSkill, decision transformers) or hybrid approaches (human-in-the-loop training[30]).
+Multimodal Data Scarcity: Surgical VLA models need large annotated datasets, but data is scarce. New benchmarks (e.g., SurgT, SurgPose) help, but more is needed for language-action grounding. Simulators (SurRoL, AMBF) aid data generation, yet closing the sim–real gap (tissue visual realism, robot uncertainty) is an open problem.
+Domain Knowledge for VLMs: Generic VLMs (GPT-4V, Flamingo) lack surgical context. As seen with GPT-4o in SRT-H, a model might mis-order a clipping step due to lack of medical knowledge[26]. This motivates either fine-tuning on surgical data or using smaller domain-specific language models. GP-VLS shows fine-tuned surgery VLMs can answer complex surgical questions[23].
+Long-Horizon Reasoning: Decomposing tasks and planning remains hard. Hierarchical frameworks (like SRT-H’s language planning) and LLM-based planners address this. Future systems may use LLMs (e.g. GPT-4V) to generate subgoals or reason about anatomy, then execute with learned low-level controllers.
+Validation and Safety: Even with high simulated success rates, clinical deployment requires rigorous validation. Real surgeries have variable anatomy and complications. Current VLA models have been tested ex vivo or on phantom tasks; extending to in vivo surgery will demand robust error handling and interpretability.
+In summary, the last five years have seen rapid advances in applying VLA methods to surgical robotics. Benchmarks like JIGSAWS, SurgT, and SurRoL provide data for learning; imitation learning (often using Transformer models) achieves human-level performance on basic tasks; and vision–language integration (via CLIP, GPT architectures) is beginning to imbue surgical robots with more general reasoning. Nevertheless, challenges of data, domain knowledge, and long-horizon planning remain, defining a rich landscape for future research.
+The State of the Art and a Critical Research Gap
+The field of surgical robotics, dominated by teleoperated systems like the da Vinci, has revolutionized minimally invasive procedures by enhancing surgeon precision and control . This paradigm, however, represents a low level of autonomy, with the surgeon in complete control.1 Consequently, there is a significant research impetus to develop "supervised autonomy," where intelligent systems automate repetitive and fatiguing sub-tasks like suturing and tissue retraction, reducing surgeon cognitive load and improving consistency.2
+This progress has been almost exclusively concentrated in Robot-Assisted Minimally Invasive Surgery (RAMIS) and is critically dependent on high-fidelity simulation. Platforms like SurRoL, and more recently GPU-accelerated environments like ORBIT-Surgical and SurgicalGym, have become indispensable for developing and training robotic policies using reinforcement learning (RL) and imitation learning (IL).2 These simulators provide the vast quantities of data required by modern machine learning algorithms in a safe, scalable manner.2
+However, this entire ecosystem of tools and algorithms exhibits a systemic "laparoscopic bias." Existing simulators are fundamentally designed around the kinematics, perception, and constraints of RAMIS.2 This leaves a critical research gap: the domain of open surgery. Open surgery presents a fundamentally different set of challenges:
+Unconstrained Kinematics: Unlike the fulcrum effect of a small incision in RAMIS, open surgery requires robotic arms to navigate a large, unstructured workspace without a remote center of motion (RCM).8
+Complex Perception: The surgical field is wide, dynamic, and cluttered, a stark contrast to the narrow, stable, and magnified view from an endoscope in RAMIS.2
+Large-Scale Tissue Interaction: Open procedures involve more direct and large-scale manipulation of organs, placing extreme demands on the fidelity of soft-body physics simulation.2
+No existing open-source simulation platform is adequately equipped to model this environment, creating a technological vacuum that stalls progress in autonomous open surgery. The development of such a platform is the necessary first step to unlock new algorithmic possibilities.
+Learning Paradigms for Surgical Dexterity
+The development of autonomous surgical skills has progressed through increasingly sophisticated learning paradigms, providing a strong technical foundation for the proposed work.
+Imitation Learning (IL) and Demonstration-Guided RL: IL, where an agent learns by mimicking expert trajectories, is exceptionally well-suited to surgery.2 While simple Behavioral Cloning (BC) can be brittle, advanced methods use expert data to guide the exploration process of a reinforcement learning agent, dramatically improving sample efficiency in tasks with sparse rewards.2 The
+Demonstration-guided EXploration (DEX) algorithm exemplifies this hybrid approach, using dual actor-critic regularization to ensure the agent's policy is consistently pushed towards expert-like behavior.2
+Bridging the Sim-to-Real Gap: A central challenge is transferring policies learned in simulation to physical hardware. The state-of-the-art VPPV (Visual Parsing, Perceptual Regressor, Policy Learning, Visual Servoing) framework achieves remarkable zero-shot sim-to-real transfer by decoupling perception and control.2 It leverages powerful, pre-trained vision foundation models (e.g., SAM) for robust visual parsing, which is then mapped to a low-dimensional state representation for the RL policy. This insulates the control policy from the visual "reality gap." The final, high-precision manipulation is handled by a classical visual servoing controller, combining the generalization of learning with the reliability of classical control.2
+Proposed Technical Approach: A VLA Framework for Open Surgery
+The next frontier in surgical autonomy is the adoption of Vision-Language-Action (VLA) models. Built on the same transformer architecture as Large Language Models (LLMs), VLAs are general-purpose agents that can process multi-modal inputs (vision, language, proprioception) to execute high-level semantic instructions (e.g., "grasp the suture needle").4 Pre-trained on massive, diverse datasets like Open X-Embodiment, open-source models like OpenVLA can generalize to new tasks and objects with minimal fine-tuning.12 Early medical applications like EndoVLA and RoboNurse-VLA have already demonstrated the feasibility of this paradigm.15
+This proposal synthesizes these state-of-the-art principles to address the challenges of open surgery.
+Hardware-Agnostic Policy Development: To accommodate an undefined robotic platform, we will leverage Parameter-Efficient Fine-Tuning (PEFT) techniques like Low-Rank Adaptation (LoRA). LoRA allows a large, pre-trained VLA model to be rapidly adapted to a new task or robot by training only a small fraction (~1.4%) of its parameters.12 This enables the development of a foundational policy in simulation that can be efficiently specialized to the final hardware.
+Data Generation via Imitation Learning: We will first develop the novel, high-fidelity simulation environment for open surgery. Within this environment, we will collect a high-quality dataset of expert demonstrations for the dexterous task of wound closure and suturing. This dataset will be used to fine-tune a pre-trained VLA model like OpenVLA.
+Hybrid VLA-Control Architecture: To meet the sub-millimeter precision required for surgery, we propose a hybrid architecture inspired by the VPPV framework.2 The fine-tuned VLA will be responsible for high-level perception, semantic understanding, and motion planning (e.g., identifying the next suture entry point). The final, high-precision manipulation (e.g., needle grasp and insertion) will be delegated to a classical, verifiable controller. This approach strategically combines the powerful semantic generalization of VLA models with the proven accuracy of classical control, offering a robust and pragmatic path toward autonomous dexterity in open surgery.
+
+2. Related Work and Technical Foundations
+2.1. Advances in Surgical Robot Learning for Laparoscopic Procedures
+Recent years have seen remarkable progress in applying machine learning to autonomous and semi-autonomous laparoscopic surgical robotics, particularly using imitation learning, reinforcement learning, and vision–language–action (VLA) paradigms.
+The SurRoL platform (Xu et al., 2021) introduced the first open-source, reinforcement learning–centred simulation environment compatible with the da Vinci Research Kit (dVRK). SurRoL provides a diverse suite of bimanual manipulation benchmarks (e.g. peg transfer, needle handling, bi-manual pick-and-place), realistic physics-based interactions, and scripted expert policies for large-scale data generation. This platform has since become the standard foundation for developing and evaluating control policies for laparoscopic surgical robots.
+Building on this infrastructure, Long et al. (2025) proposed a general-purpose framework for surgical embodied intelligence, demonstrating for the first time that modular learning systems can generalise across tasks, environments, and platforms. Their VPPV pipeline (Visual Parsing → Perceptual Regression → Policy Learning → Visual Servoing) integrates vision foundation models, 3D reconstruction from stereo videos, soft-tissue simulation using material point methods, and reinforcement learning. This allowed training autonomous agents in simulation and transferring them zero-shot to physical platforms (dVRK and Sentire) with only an 8% performance drop across seven dexterous tasks, including peg transfer, gauze retrieval, and needle handling. This work establishes a powerful methodology for simulation-to-real transfer and large-scale policy learning for laparoscopic settings.
+Complementary to these control-oriented advances, Zisimopoulos et al. (2023) addressed the critical challenge of leveraging abundant surgical video data for action learning. They proposed a two-stage pipeline: (1) training spatio-temporal video encoders (e.g. TimeSformer) on large surgical video datasets (e.g. JIGSAWS, Cholec80) for phase and tool understanding, and (2) using these pretrained encoders to drive behaviour cloning policies that predict bimanual robot control commands. Importantly, their method enables policy learning directly from video embeddings, either with aligned kinematic data (e.g. JIGSAWS) or pseudo-labelled trajectories extracted from tool tracking. This work represents a crucial methodological bridge between passive video understanding and active robotic control, demonstrating that vision encoders pretrained on surgical tasks can meaningfully accelerate imitation learning and enable bimanual action prediction from monocular video streams.
+
+2.2. Gaps and Opportunities: Open Surgery and Dexterous Manipulation
+Despite these advances, the focus of current research remains almost exclusively on laparoscopic, teleoperated platforms, particularly the da Vinci system. In contrast, open surgery involves a distinct set of dexterous, bimanual manipulation skills — such as wound closure, tissue approximation, suturing, and knot tying — performed in unconstrained 3D workspaces without trocar pivoting. These skills remain essential in trauma, transplant, vascular, and emergency surgical contexts, yet no general-purpose robot learning frameworks currently address open-surgery manipulation. Training datasets, simulation environments, and benchmarks for such tasks are practically non-existent.
+Moreover, while laparoscopic systems offer kinematic streams for paired video–action learning, open surgery lacks native robot telemetry, making it difficult to apply classical behaviour cloning directly. Instead, surgical video archives (e.g. training labs, cadaveric recordings) represent the primary available modality. Leveraging these videos to train action-conditioned models requires new methods for pose estimation, tool–tissue interaction tracking, and pseudo-labelling — approaches that have been explored only in laparoscopic contexts.
+
+2.3. Relevance to the Proposed Work
+This project strategically builds on the above foundations to address the largely unexplored domain of open surgery. Specifically, we aim to:
+Translate VLA and imitation learning methods from laparoscopic to open-surgery contexts, starting with dexterous wound closure and suturing tasks as a clinically relevant exemplar.
+
+
+Leverage existing surgical video archives to extract bimanual manipulation trajectories using modern computer vision techniques (e.g. 3D keypoint tracking, stereo reconstruction, segmentation), following principles established in Zisimopoulos et al. (2023) for action learning from video.
+
+
+Develop a simulation and data infrastructure for open-surgery tasks, analogous to SurRoL, enabling the training of vision–language–action models for bimanual manipulation in unstructured, open settings.
+
+
+Establish feasibility and proof of concept for these methods in simulation and benchtop environments, with future real-robot integration contingent on platform availability.
+
+
+The project aligns with the R21 mechanism’s emphasis on exploratory and high-impact research: it tackles a strategically important but technically underexplored area (open surgery), leverages cutting-edge AI architectures (transformers, VLAs), and lays the groundwork for future real-world autonomous systems. Even in the absence of immediate robotic hardware, the proposed work will deliver datasets, simulation assets, and VLA policies that are essential precursors to deploying autonomous or semi-autonomous systems for open surgical assistance.
+
+
+Specific Aims
+This project addresses a critical problem in surgical education: the variability in bimanual dexterity skills (suturing and knot-tying). 
+The three specific aims are:
+
